@@ -34,12 +34,12 @@
   animation: moveQueue 1s var(--iterations) ease;
 }
 
-.hide-queue {
-  opacity: 0;
-}
-
 .show-queue {
   animation: showQueue 1s ease forwards;
+}
+
+.hide-queue {
+  opacity: 0.1;
 }
 
 @keyframes showQueue {
