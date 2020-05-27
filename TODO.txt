@@ -1,0 +1,29 @@
+TODO 
+
+Fetch initial data 
+
+    - set data that doesn't change (bartenders, closing time, maybe more 🤷‍♂)
+    - set initial data for element that do change (queue, taps, most wanted)
+
+bartender
+    - fetch the svgs 
+    - attach the svg to the correct person 
+    (this can all be hardcoded but if we do it like this then if they hire a new bartender it's automatic to update)
+
+Now Serving
+    - Create to element, one visible and one that "outside" the container and set the contatiner to overflow: hidden
+    - create animation that fade the visible ticket and slides in the new one.
+    - create a function that send the data from the first element to the next with an eventlistener("animationend", function) to make it look smooth (you can try and get hints from the queue function)
+
+Queue 
+    - change the code so instead of setting the textcontent of p to the id, use the id to set show the correct ticket (maybe as a background image on the div)
+
+ON TAP
+    - check if the data from the database have the same beer on tap more than once and if so make sure to only display it once 
+    - use the data you fetched to set the correct icons, price etc for each taps
+
+MOST WANTED 
+    - everytime the function updates the queue (adds new orders), check what is ordered
+    - make a variable for each type of beer (githop = 0) and add 1 everytime a new beer of that type is ordered 
+    - create a function to find the beer with the highest value and apply a mostwanted class to that tap or something like that
+    
