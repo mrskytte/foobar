@@ -5,6 +5,9 @@ Fetch initial data
     - set data that doesn't change (bartenders, closing time, maybe more 🤷‍♂)
     - set initial data for element that do change (queue, taps, most wanted)
 
+Fetch updated data
+    - Use set interval to keep fetching data and update what need updating (queue, new serving, most wanted)
+    
 bartender
     - fetch the svgs 
     - attach the svg to the correct person 
@@ -26,4 +29,3 @@ MOST WANTED
     - everytime the function updates the queue (adds new orders), check what is ordered
     - make a variable for each type of beer (githop = 0) and add 1 everytime a new beer of that type is ordered 
     - create a function to find the beer with the highest value and apply a mostwanted class to that tap or something like that
-    
