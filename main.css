@@ -51,6 +51,8 @@ body>main>div.box3>img {
     background: white;
     grid-area: box5;
     text-align: right;
+    display: grid;
+
 }
 
 h1,
@@ -79,4 +81,20 @@ h2 {
 
 .bartenders {
     margin-top: 5%;
+}
+
+template {
+    margin: auto;
+}
+
+tr {
+    color: #f0621f;
+
+}
+
+td {
+    width: 100%;
+    padding: 2%;
+
+
 }

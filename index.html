@@ -5,11 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
     <title>Dashboard</title>
 </head>
 
 <body>
+
+
     <main>
         <div class="box1">
             <h2>BARTENDERS</h1>
@@ -30,27 +33,84 @@
         </div>
         <div class="box4">
             <h1>CURRENT QUEUE</h1>
+            <div id="container2">
+                <div id="container">
+                    <div id="ticket1" class="queue-entry hide-queue" data-position="one">
+                        <p class="order-id">1</p>
+                    </div>
+                    <div id="ticket2" class="queue-entry hide-queue" data-position="two">
+                        <p class="order-id">2</p>
+                    </div>
+                    <div id="ticket3" class="queue-entry hide-queue" data-position="three">
+                        <p class="order-id">3</p>
+                    </div>
+                    <div id="ticket4" class="queue-entry hide-queue" data-position="four">
+                        <p class="order-id">4</p>
+                    </div>
+                    <div id="ticket5" class="queue-entry hide-queue" data-position="five">
+                        <p class="order-id">5</p>
+                    </div>
+                    <div id="ticket6" class="queue-entry hide-queue" data-position="six">
+                        <p class="order-id">6</p>
+                    </div>
+                    <div id="ticket7" class="queue-entry hide-queue" data-position="seven">
+                        <p class="order-id">7</p>
+                    </div>
+                    <div id="ticket8" class="queue-entry hide-queue" data-position="eight">
+                        <p class="order-id">8</p>
+                    </div>
+                    <div id="ticket9" class="queue-entry hide-queue" data-position="nine">
+                        <p class="order-id">9</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+
         </div>
         <div class="box5">
             <h1>ON TAP TODAY</h1>
             <table id="list">
-                <thead>
+
 
                 <tbody>
+
+
                 </tbody>
-                </thead>
             </table>
+
+
             <template id="beer">
+
                 <tr>
                     <td data-field="image">IMAGE</td>
+
+                </tr>
+
+                <tr>
                     <td data-field="name">NAME</td>
+                </tr>
+
+                <tr>
                     <td data-field="type">TYPE</td>
+
+                </tr>
+
+                <tr>
+                    <td data-field="alc">ALCOHOL</td>
+
+                </tr>
+
+                <tr>
                     <td data-field="price">PRICE</td>
                 </tr>
+
             </template>
         </div>
     </main>
     <script src="main.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
