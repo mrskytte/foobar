@@ -1,0 +1,91 @@
+[{
+        "name": "El Hefe",
+        "desc": "Contains flavors derived from flowers, roots, seeds or certain fruits or vegetables.\nThe hop character is low, allowing the added ingredient to shine through.\nThe appearance, mouthfeel and aromas is filled with the ingredients.\nThis beer style encompasses innovative examples as well as traditional holiday and winter ales.",
+        "alc": "13.2",
+        "type": "Herb & Spice Lager",
+        "price": "50",
+        "popular": "true",
+        "image": "elhefe"
+    },
+    {
+        "name": "Fairy Tale Ale",
+        "desc": "This fruit lambic takes on the color and flavor of cherries.\nIt's sweet & cloudy. Light notes of Brettanomyces yeast are present. Sourness is an important part of it's flavor profile, though the sweetness diminishes the perceived intensity.",
+        "alc": "7.0",
+        "type": "Fruit Lambic",
+        "price": "65",
+        "popular": "false",
+        "image": "bigdaddy"
+    },
+    {
+        "name": "GitHop",
+        "desc": "This beer is brewed using malted sorghum and buckwheat, which are grains that do not contain gluten to brew beers.\nAn easy-drinking, hazy pale ale that offers bright citrus flavors, which are complemented by subtle tropical and stone fruit notes.",
+        "alc": "4.2",
+        "type": "Gluten-free Pale Ale",
+        "price": "60",
+        "popular": "false",
+        "image": "githop"
+    },
+    {
+        "name": "Hollaback Lager",
+        "desc": "This craft beer showcases both malt and hops.\nThis Amber lager is a medium-bodied lager with a toasty or caramel-like malt character. It has medium hop bitterness.\nThe brewers have used decoction mash and dry-hopping to achieve advanced flavors.",
+        "alc": "6.5",
+        "type": "American Amber Lager",
+        "price": "45",
+        "popular": "true",
+        "image": "hollaback"
+    },
+    {
+        "name": "Hoppily Ever After",
+        "desc": "This beer is finished with Belgian yeast strains while the hops employed are American.\nIt has a cleaner bitterness versus American IPAs, and a pronounced dry edge, akin to an IPA crossed with a Belgian Tripel.\nIt's quite cloudy, and feature tight lacing, excellent head retention, and fantastic billowy heads that mesmerize",
+        "alc": "11",
+        "type": "Belgian IPA",
+        "price": "75",
+        "popular": "false",
+        "image": "hoppilyeverafter"
+    },
+    {
+        "name": "Mowintime",
+        "desc": "This Bohemian pilsener has a slightly sweet and evident malt character and a toasted, biscuit-like, bready malt character.\nHop bitterness is perceived as medium with a low level of noble-type hop aroma and flavor.",
+        "alc": "4",
+        "type": "Bohemian-style Pilsner",
+        "price": "50",
+        "popular": "false",
+        "image": "mowingtime"
+    },
+    {
+        "name": "Row 26",
+        "desc": "This sweet stout, also referred to as milk stout, is black in color.\nMalt sweetness, chocolate and caramel dominate the flavor profile and contribute to the aroma.\nIt also have a medium-low roasted malt/barley-derived bitterness. Milk sugar gives this beer more body",
+        "alc": "3",
+        "type": "Milk Stout",
+        "price": "50",
+        "popular": "false",
+        "image": "row26"
+    },
+    {
+        "name": "Ruined Childhood",
+        "desc": "This red porter is a balanced beer that uses a moderate amount of kilned malts and roasted barley in the recipe, which gives the beer the color for which it is named.\nFeaturing an approachable hop bitterness which rests on the palate.\nthis dark amber-colored beer have a medium, candy-like caramel malt sweetness.",
+        "alc": "8.9",
+        "type": "Red Porter",
+        "price": "65",
+        "popular": "true",
+        "image": "ruinedchildhood"
+    },
+    {
+        "name": "Sleighride",
+        "desc": "This imperial porter have no roasted barley flavors or strong burnt/black malt character.\nMedium caramel and cocoa-like sweetness is present, with complementing hop character and malt-derived sweetness.",
+        "alc": "8.5",
+        "type": "Imperial Porter",
+        "price": "65",
+        "popular": "false",
+        "image": "sleighride"
+    },
+    {
+        "name": "Steampunk",
+        "desc": "Characterized by floral, fruity, citrus-like, piney or resinous American-variety hop character, this IPA is all about hop flavor, aroma and bitterness.",
+        "alc": "6.3",
+        "type": "California IPA",
+        "price": "50",
+        "popular": "false",
+        "image": "steampunk"
+    }
+]

@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+main {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1.75fr 1.75fr 6fr;
+    grid-template-rows: 1fr 3fr 2fr;
+    grid-template-areas: "box1 box2 box3"
+        "box1 box2 box4"
+        "box5 box5 box5";
+}
+
+.box1 {
+    background: white;
+    grid-area: box1;
+    text-align: center;
+}
+
+.box2 {
+    background: white;
+    grid-area: box2;
+    text-align: CENTER;
+}
+
+.box3 {
+    background: white;
+    grid-area: box3;
+    text-align: right;
+    padding: 1%;
+}
+
+body>main>div.box3>img {
+    width: 20%;
+    padding: 2%;
+}
+
+.box4 {
+    background: white;
+    grid-area: box4;
+    text-align: right;
+
+}
+
+.box5 {
+    background: white;
+    grid-area: box5;
+    text-align: right;
+}
+
+h1,
+h2 {
+    padding: 1%;
+
+}
+
+h1 {
+    margin: auto;
+    margin-right: 10%;
+}
+
+h2 {
+    margin-top: 10%;
+}
+
+.serving {
+    color: #f0621f;
+}
+
+.bartender {
+    width: 45%;
+    padding: 5%;
+}
+
+.bartenders {
+    margin-top: 5%;
+}
