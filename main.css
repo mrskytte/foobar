@@ -55,6 +55,10 @@ body>main>div.box3>img {
 
 }
 
+#list {
+    display: flex;
+}
+
 h1,
 h2 {
     padding: 1%;

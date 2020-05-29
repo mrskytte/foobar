@@ -29,6 +29,7 @@ async function loadJSON() {
 
 function prepareObjects(jsonData) {
     allBeers = jsonData.map(prepareObject);
+    console.log("allbeer", allBeers)
     // TODO: This might not be the function we want to call first
     displayList(allBeers);
 }
@@ -47,26 +48,26 @@ function prepareObject(jsonObject) {
 }
 
 function displayList(beers) {
-    console.log(beer);
+    console.log("beers", beers);
     // clear the list
-    document.querySelector("#list tbody").innerHTML = "";
+    document.querySelector("#list").innerHTML = "";
     // build a new list
     beers.forEach(displayBeer);
 }
 
 function displayBeer(beer) {
 
-
+    console.log("beer", beer)
     // create clone
-    const clone = document.querySelector("template#beer").content.cloneNode(true);
+    let clone = document.querySelector("#beer-template").content.cloneNode(true);
     // set clone data
     clone.querySelector("[data-field=image]").textContent = beer.image;
     clone.querySelector("[data-field=name]").textContent = beer.name;
     clone.querySelector("[data-field=type]").textContent = beer.type;
-    clone.querySelector("[data-field=type]").textContent = beer.alc;
+    clone.querySelector("[data-field=alc]").textContent = beer.alc;
     clone.querySelector("[data-field=price]").textContent = beer.price;
     // append clone to list
-    document.querySelector("#list tbody").appendChild(clone);
+    document.querySelector("#list").appendChild(clone);
 
 }
 
