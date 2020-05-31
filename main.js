@@ -37,12 +37,14 @@ function prepareObjects(jsonData) {
 function prepareObject(jsonObject) {
     console.log(jsonObject);
     const beer = Object.create(Beer);
-    beer.image = jsonObject.image;
+    //beer.image = jsonObject.image;
     beer.name = jsonObject.name;
     beer.type = jsonObject.type;
     beer.alc = jsonObject.alc;
     beer.price = jsonObject.price;
 
+    let image = "images/beers/" + jsonObject.image + ".png";
+    beer.image = image
 
     return beer;
 }
@@ -58,10 +60,11 @@ function displayList(beers) {
 function displayBeer(beer) {
 
     console.log("beer", beer)
+
     // create clone
     let clone = document.querySelector("#beer-template").content.cloneNode(true);
     // set clone data
-    clone.querySelector("[data-field=image]").textContent = beer.image;
+    clone.querySelector("#beer > img").src = beer.image;
     clone.querySelector("[data-field=name]").textContent = beer.name;
     clone.querySelector("[data-field=type]").textContent = beer.type;
     clone.querySelector("[data-field=alc]").textContent = beer.alc;

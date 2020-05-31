@@ -59,6 +59,14 @@ body>main>div.box3>img {
     display: flex;
 }
 
+#label {
+    size: 30%;
+}
+
+#beer>img {
+    width: 80%;
+}
+
 h1,
 h2 {
     padding: 1%;
