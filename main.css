@@ -69,6 +69,14 @@ body > main > div.box3 > img {
     "price price";
 }
 
+#label {
+  size: 30%;
+}
+
+#beer > img {
+  width: 80%;
+}
+
 h1,
 h2 {
   padding: 1%;
@@ -128,4 +136,75 @@ h2 {
 
 template {
   margin: auto;
+}
+tr {
+  color: #f0621f;
+}
+
+td {
+  width: 100%;
+  padding: 2%;
+}
+
+@media only screen and (max-width: 966px) {
+  * {
+    background-color: lightblue;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  body {
+    position: relative;
+  }
+
+  .box1,
+  .box2,
+  .box3,
+  .box4,
+  .box5 {
+    display: none;
+  }
+
+  main {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 4fr 4fr 6fr 6fr;
+    grid-template-areas:
+      "logo"
+      "time"
+      "bartenderino"
+      "stock"
+      "ontap"
+      "bestselling";
+  }
+
+  .logo {
+    background-color: #2a2723;
+  }
+
+  .logologo {
+    width: 30%;
+    padding: 1%;
+    margin: 2%;
+    background-color: #2a2723;
+  }
+
+  .time {
+    text-align: center;
+    padding: 1%;
+    margin: 2%;
+    border-bottom: 5px solid #2a2723;
+  }
+
+  .tillclosing {
+    color: #f0621f;
+  }
 }
