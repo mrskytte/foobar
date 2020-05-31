@@ -237,26 +237,16 @@ function prepareObjects(jsonData) {
 }
 
 function prepareObject(jsonObject) {
-<<<<<<< HEAD
-  console.log("data", jsonObject);
+  console.log(jsonObject);
   const beer = Object.create(Beer);
-  beer.image = jsonObject[1].image;
-  beer.name = jsonObject[1].name;
-  beer.type = jsonObject[1].type;
-  beer.alc = jsonObject[1].alc;
-  beer.price = jsonObject[1].price;
-=======
-    console.log(jsonObject);
-    const beer = Object.create(Beer);
-    //beer.image = jsonObject.image;
-    beer.name = jsonObject.name;
-    beer.type = jsonObject.type;
-    beer.alc = jsonObject.alc;
-    beer.price = jsonObject.price;
+  //beer.image = jsonObject.image;
+  beer.name = jsonObject.name;
+  beer.type = jsonObject.type;
+  beer.alc = jsonObject.alc;
+  beer.price = jsonObject.price;
 
-    let image = "images/beers/" + jsonObject.image + ".png";
-    beer.image = image
->>>>>>> 2d2154144ab5155ab3e6604204f7e8a2b5478718
+  let image = "images/beers/" + jsonObject.image + ".png";
+  beer.image = image;
 
   return beer;
 }
@@ -270,12 +260,12 @@ function displayList(beers) {
 }
 
 function displayBeer(beer) {
-<<<<<<< HEAD
   console.log("beer", beer);
+
   // create clone
   let clone = document.querySelector("#beer-template").content.cloneNode(true);
   // set clone data
-  clone.querySelector("[data-field=image]").textContent = beer.image;
+  clone.querySelector("#beer > img").src = beer.image;
   clone.querySelector("[data-field=name]").textContent = beer.name;
   clone.querySelector("[data-field=type]").textContent = beer.type;
   clone.querySelector("[data-field=alc]").textContent = beer.alc;
@@ -285,36 +275,12 @@ function displayBeer(beer) {
 }
 
 function showBeer(beer) {
-  const template = document.querySelector(".beer").content;
+  const template = document.querySelector("#beer").content;
   const clone = template.cloneNode(true);
 }
-=======
-
-    console.log("beer", beer)
-
-    // create clone
-    let clone = document.querySelector("#beer-template").content.cloneNode(true);
-    // set clone data
-    clone.querySelector("#beer > img").src = beer.image;
-    clone.querySelector("[data-field=name]").textContent = beer.name;
-    clone.querySelector("[data-field=type]").textContent = beer.type;
-    clone.querySelector("[data-field=alc]").textContent = beer.alc;
-    clone.querySelector("[data-field=price]").textContent = beer.price;
-    // append clone to list
-    document.querySelector("#list").appendChild(clone);
-
-}
-
-function showBeer(beer) {
-    const template = document.querySelector("#beer").content;
-    const clone = template.cloneNode(true);
-}
-
 
 ///THE MANAGER VIEW///
 
 //Setting up the fetching//
 
-
 //The time//
->>>>>>> 2d2154144ab5155ab3e6604204f7e8a2b5478718
