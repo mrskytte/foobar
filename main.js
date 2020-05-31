@@ -78,3 +78,11 @@ function showBeer(beer) {
     const template = document.querySelector("#beer").content;
     const clone = template.cloneNode(true);
 }
+
+
+///THE MANAGER VIEW///
+
+//Setting up the fetching//
+
+
+//The time//

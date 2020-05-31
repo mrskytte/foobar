@@ -62,9 +62,9 @@ function prepareQueue() {
 
   for (let i = 0; i < currentQueue.length; i++) {
     const id =
-      currentQueue[i].id > 100
-        ? currentQueue[i].id.toString().substring(1)
-        : currentQueue[i].id;
+      currentQueue[i].id > 100 ?
+      currentQueue[i].id.toString().substring(1) :
+      currentQueue[i].id;
 
     if (id !== "hideme") {
       queue[i].classList.remove("hide-queue");
@@ -91,7 +91,9 @@ function prepareQueue() {
 function fillOutQueueArray() {
   if (currentQueue.length < 10) {
     for (let i = currentQueue.length; i < 9; i++) {
-      currentQueue.push({ id: "hideme" });
+      currentQueue.push({
+        id: "hideme"
+      });
     }
   }
   currentQueue.length = 9;
@@ -109,37 +111,36 @@ async function fetchQueue() {
 
 function checkQueueProgress(queue) {
   currentQueue = [...queue];
-  console.log("last", lastQueue);
-  console.log("current", currentQueue);
+  //console.log("last", lastQueue);
+  //console.log("current", currentQueue);
   if (lastQueue.length < currentQueue.length) {
-    console.log("adding new entries");
+    //console.log("adding new entries");
     prepareQueue();
   }
   if (!currentQueue[0] && !lastQueue[0]) {
-    console.log("empty arrays and nothing new");
+    //console.log("empty arrays and nothing new");
   } else if (!currentQueue[0] && lastQueue[0]) {
-    console.log("Queue emptied out");
+    //console.log("Queue emptied out");
     setIterations(lastQueue.length);
     lastQueue = [...currentQueue];
     updateQueue();
   } else if (!lastQueue[0] && currentQueue[0]) {
-    console.log("new entry + old queue empty ");
+    //console.log("new entry + old queue empty ");
     lastQueue = [...currentQueue];
 
     updateQueue();
   } else if (lastQueue[0].id !== currentQueue[0].id) {
-    if (lastQueue.length < 2) {
-    } else if (lastQueue[1].id === currentQueue[0].id) {
+    if (lastQueue.length < 2) {} else if (lastQueue[1].id === currentQueue[0].id) {
       setIterations(1);
     } else if (lastQueue[2].id === currentQueue[0].id) {
       setIterations(2);
     }
     lastQueue = [...currentQueue];
 
-    console.log("new entry");
+    //console.log("new entry");
     updateQueue();
   } else if (lastQueue[0].id === currentQueue[0].id) {
-    console.log("no change");
+    //console.log("no change");
   } else {
     lastQueue = [...currentQueue];
 
@@ -168,10 +169,10 @@ function moveQueue() {
 
 function changeTicketId(thisTicket, i) {
   const id =
-    currentQueue[i].id > 100
-      ? currentQueue[i].id.toString().substring(1)
-      : currentQueue[i].id;
-  console.log(id);
+    currentQueue[i].id > 100 ?
+    currentQueue[i].id.toString().substring(1) :
+    currentQueue[i].id;
+  //console.log(id);
   thisTicket.querySelector("p").textContent = id;
 }
 
