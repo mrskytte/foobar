@@ -1,169 +1,186 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
 }
 
 main {
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1.75fr 1.75fr 6fr;
-    grid-template-rows: 1fr 3fr 2fr;
-    grid-template-areas:
-        "box1 box2 box3"
-        "box1 box2 box4"
-        "box5 box5 box5";
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1.75fr 1.75fr 6fr;
+  grid-template-rows: 1fr 3fr 2fr;
+  grid-template-areas:
+    "box1 box2 box3"
+    "box1 box2 box4"
+    "box5 box5 box5";
 }
 
 .box1 {
-    background: white;
-    grid-area: box1;
-    text-align: center;
+  background: white;
+  grid-area: box1;
+  text-align: center;
 }
 
 .box2 {
-    background: white;
-    grid-area: box2;
-    text-align: CENTER;
+  background: white;
+  grid-area: box2;
+  text-align: CENTER;
 }
 
 .box3 {
-    background: white;
-    grid-area: box3;
-    text-align: right;
-    padding: 1%;
+  background: white;
+  grid-area: box3;
+  text-align: right;
+  padding: 1%;
 }
 
-body>main>div.box3>img {
-    width: 20%;
-    padding: 2%;
+body > main > div.box3 > img {
+  width: 20%;
+  padding: 2%;
 }
 
 .box4 {
-    background: white;
-    grid-area: box4;
-    text-align: right;
+  background: white;
+  grid-area: box4;
+  text-align: right;
 }
 
 .box5 {
-    background: white;
-    grid-area: box5;
-    text-align: right;
-    display: grid;
+  background: white;
+  grid-area: box5;
+  text-align: right;
+  display: grid;
 }
 
 #list {
-    display: flex;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  align-items: stretch;
+}
+
+.beer {
+  display: grid;
+  grid-template-areas:
+    "image image"
+    "name name"
+    "type alc"
+    "price price";
 }
 
 #label {
-    size: 30%;
+  size: 30%;
 }
 
-#beer>img {
-    width: 80%;
+#beer > img {
+  width: 80%;
 }
 
 h1,
 h2 {
-    padding: 1%;
+  padding: 1%;
 }
 
 h1 {
-    margin: auto;
-    margin-right: 10%;
+  margin: auto;
+  margin-right: 10%;
 }
 
 h2 {
-    margin-top: 10%;
+  margin-top: 10%;
 }
 
-.serving {
-    color: #f0621f;
+.ontap {
+  font-size: 14px;
+  margin-top: 0;
 }
 
-.bartender {
-    width: 45%;
-    padding: 5%;
+.price {
+  font-size: 14px;
+  color: #f0621f;
 }
 
-.bartenders {
-    margin-top: 5%;
+.beerimage {
+  grid-area: image;
 }
 
-template {
-    margin: auto;
+.beername {
+  grid-area: name;
+}
+
+.beertype {
+  grid-area: type;
 }
 
 tr {
-    color: #f0621f;
+  color: #f0621f;
 }
 
 td {
-    width: 100%;
-    padding: 2%;
+  width: 100%;
+  padding: 2%;
 }
 
 @media only screen and (max-width: 966px) {
-    * {
-        background-color: lightblue;
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Montserrat", sans-serif;
-    }
+  * {
+    background-color: lightblue;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+  }
 
-    html,
-    body {
-        overflow-x: hidden;
-    }
+  html,
+  body {
+    overflow-x: hidden;
+  }
 
-    body {
-        position: relative;
-    }
+  body {
+    position: relative;
+  }
 
-    .box1,
-    .box2,
-    .box3,
-    .box4,
-    .box5 {
-        display: none;
-    }
+  .box1,
+  .box2,
+  .box3,
+  .box4,
+  .box5 {
+    display: none;
+  }
 
-    main {
-        height: 100vh;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr 4fr 4fr 6fr 6fr;
-        grid-template-areas:
-            "logo"
-            "time"
-            "bartenderino"
-            "stock"
-            "ontap"
-            "bestselling";
-    }
+  main {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 4fr 4fr 6fr 6fr;
+    grid-template-areas:
+      "logo"
+      "time"
+      "bartenderino"
+      "stock"
+      "ontap"
+      "bestselling";
+  }
 
-    .logo {
-        background-color: #2a2723;
-    }
+  .logo {
+    background-color: #2a2723;
+  }
 
-    .logologo {
-        width: 30%;
-        padding: 1%;
-        margin: 2%;
-        background-color: #2a2723;
-    }
+  .logologo {
+    width: 30%;
+    padding: 1%;
+    margin: 2%;
+    background-color: #2a2723;
+  }
 
-    .time {
-        text-align: center;
-        padding: 1%;
-        margin: 2%;
-        border-bottom: 5px solid #2a2723;
-    }
+  .time {
+    text-align: center;
+    padding: 1%;
+    margin: 2%;
+    border-bottom: 5px solid #2a2723;
+  }
 
-    .tillclosing {
-        color: #f0621f;
-    }
+  .tillclosing {
+    color: #f0621f;
+  }
 }
