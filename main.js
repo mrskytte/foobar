@@ -6,6 +6,12 @@ let domTickets = [];
 let lastQueue = [];
 let currentQueue = [];
 
+let nowServing = [];
+let currentlyNowServing = [];
+let bartenderOneServing = [{ id: "empty" }, { id: "empty" }];
+let bartenderTwoServing = [{ id: "empty" }, { id: "empty" }];
+let bartenderThreeServing = [{ id: "empty" }, { id: "empty" }];
+
 let beersArray = [];
 let allBeers = [];
 let displayedBeers = [];
@@ -20,11 +26,10 @@ const Beer = {
 const endpoint = "https://fireorange-foobar.herokuapp.com";
 
 function init() {
-  start();
   domTickets = document.querySelectorAll(".queue-entry");
   getQueueSpacing();
   isQueueMoveDone();
-  getInitialQueue();
+  getInitialData();
   prepareQueue();
 }
 
@@ -55,9 +60,10 @@ function isQueueMoveDone() {
   }
 }
 
-async function getInitialQueue() {
+async function getInitialData() {
   const data = await fetch(endpoint);
   const response = await data.json();
+  console.log("response", response);
 
   const onTap = Object.values(response.taps);
 
@@ -70,14 +76,130 @@ async function getInitialQueue() {
   onTap.forEach((oneTap) => {
     taps.push(oneTap.beer);
   });
-  console.log("taps", taps);
-  console.log("beersArr", beersArray);
-
   beersOnTap = beersArray.filter((beer) => taps.includes(beer[1].name));
   currentQueue = [...response.queue];
   prepareObjects(beersOnTap);
+  prepareNowServing(response.serving);
   prepareQueue();
   startSystem();
+}
+
+function prepareNowServing(data) {
+  console.log("data", data);
+  nowServing = [...data];
+
+  if (nowServing[0]) {
+    bartenderOneServing.unshift(nowServing[0]);
+    bartenderOneServing.pop();
+    displayNowServing(bartenderOneServing, 1);
+  }
+  if (nowServing[1]) {
+    bartenderTwoServing.unshift(nowServing[1]);
+    bartenderTwoServing.pop();
+    displayNowServing(bartenderTwoServing, 2);
+  }
+  if (nowServing[2]) {
+    bartenderThreeServing.unshift(nowServing[2]);
+    bartenderThreeServing.pop();
+    displayNowServing(bartenderThreeServing, 3);
+  }
+}
+
+function displayNowServing(bartender, bartenderNumber) {
+  const servingTicket = document.querySelector(`#serving${bartenderNumber}`);
+  const n = bartender[0].id.toString().length - 2;
+  const id =
+    bartender[0].id > 100
+      ? bartender[0].id.toString().substring(n)
+      : bartender[0].id;
+  const imgUrl = `url('images/tickets/ticket_${id}.png')`;
+  servingTicket.style.setProperty("--image-url", imgUrl);
+}
+
+function updateNowServing(update) {
+  currentlyNowServing = [...update];
+  if (currentlyNowServing.length < 3) {
+    console.log("nobody to serve");
+    console.log("bar 1", bartenderOneServing);
+    console.log("bar 2", bartenderTwoServing);
+    console.log("bar 3", bartenderThreeServing);
+  } else if (
+    JSON.stringify(currentlyNowServing) === JSON.stringify(nowServing)
+  ) {
+    console.log("the same");
+  } else if (
+    nowServing[0].id === currentlyNowServing[0].id &&
+    nowServing[1].id === currentlyNowServing[1].id
+  ) {
+    oneNewNowServingEntry();
+  } else if (nowServing[0].id === currentlyNowServing[0].id) {
+    oneNewNowServingEntry();
+  } else if (nowServing[1].id === currentlyNowServing[0].id) {
+    oneNewNowServingEntry();
+  } else if (nowServing[2].id === currentlyNowServing[0].id) {
+    twoNewNowServingEntries();
+  }
+  nowServing = [...currentlyNowServing];
+}
+
+function twoNewNowServingEntries() {
+  let counter = 1;
+  if (
+    !currentlyNowServing.some((order) => order.id === bartenderOneServing[0].id)
+  ) {
+    bartenderOneServing.unshift(currentlyNowServing[counter]);
+    bartenderOneServing.pop();
+    displayNowServing(bartenderOneServing, 1);
+    counter++;
+    console.log("two new Order one", bartenderOneServing[0].id);
+  }
+  if (
+    !currentlyNowServing.some((order) => order.id === bartenderTwoServing[0].id)
+  ) {
+    bartenderTwoServing.unshift(currentlyNowServing[counter]);
+    bartenderTwoServing.pop();
+    displayNowServing(bartenderTwoServing, 2);
+    console.log("two new Order two", bartenderTwoServing[0].id);
+    counter++;
+  }
+  if (
+    !currentlyNowServing.some(
+      (order) => order.id === bartenderThreeServing[0].id
+    )
+  ) {
+    bartenderThreeServing.unshift(currentlyNowServing[counter]);
+    bartenderThreeServing.pop();
+    displayNowServing(bartenderThreeServing, 3);
+    counter++;
+    console.log("two new Order three", bartenderThreeServing[0].id);
+  }
+}
+
+function oneNewNowServingEntry() {
+  if (
+    !currentlyNowServing.some((order) => order.id === bartenderOneServing[0].id)
+  ) {
+    bartenderOneServing.unshift(currentlyNowServing[2]);
+    bartenderOneServing.pop();
+    displayNowServing(bartenderOneServing, 1);
+    console.log("new Order one", bartenderOneServing[0].id);
+  } else if (
+    !currentlyNowServing.some((order) => order.id === bartenderTwoServing[0].id)
+  ) {
+    bartenderTwoServing.unshift(currentlyNowServing[2]);
+    bartenderTwoServing.pop();
+    displayNowServing(bartenderTwoServing, 2);
+    console.log("new Order two", bartenderTwoServing[0].id);
+  } else if (
+    !currentlyNowServing.some(
+      (order) => order.id === bartenderThreeServing[0].id
+    )
+  ) {
+    bartenderThreeServing.unshift(currentlyNowServing[2]);
+    bartenderThreeServing.pop();
+    displayNowServing(bartenderThreeServing, 3);
+    console.log("new Order three", bartenderThreeServing[0].id);
+  }
 }
 
 function prepareQueue() {
@@ -126,13 +248,14 @@ function fillOutQueueArray() {
 }
 
 function startSystem() {
-  setInterval(fetchQueue, 3000);
+  setInterval(updateData, 3000);
 }
 
-async function fetchQueue() {
+async function updateData() {
   const data = await fetch(endpoint);
   const response = await data.json();
   checkQueueProgress(response.queue);
+  updateNowServing(response.serving);
 }
 
 function checkQueueProgress(queue) {
@@ -187,6 +310,7 @@ function setIterations(iterations) {
 }
 
 function moveQueue() {
+  console.log(currentQueue);
   for (let i = 0; i < 6; i++) {
     const thisTicket = document.getElementById(`ticket${1 + i}`);
     changeTicketId(thisTicket, i);
@@ -195,7 +319,6 @@ function moveQueue() {
 }
 
 function changeTicketId(thisTicket, i) {
-  console.log(i, thisTicket);
   const n = currentQueue[i].id.toString().length - 2;
   const id =
     currentQueue[i].id > 100
@@ -220,22 +343,6 @@ function showActiveTickets() {
   );
 }
 
-// KERTTU AND MICHAL CODE STARTS HERE
-
-function start() {
-  console.log("ready");
-
-  //   loadJSON();
-}
-
-async function loadJSON() {
-  //   const response = await fetch("beers.json");
-  //   const jsonData = await response.json();
-  //   console.log(jsonData);
-  //   beersArray = Object.entries(response);
-  // when loaded, prepare data objects
-}
-
 function prepareObjects(jsonData) {
   allBeers = jsonData.map(prepareObject);
   // TODO: This might not be the function we want to call first
@@ -243,7 +350,6 @@ function prepareObjects(jsonData) {
 }
 
 function prepareObject(jsonObject) {
-  console.log("data", jsonObject);
   const beer = Object.create(Beer);
   //beer.image = jsonObject[1].image;
   beer.name = jsonObject[1].name;
@@ -258,7 +364,6 @@ function prepareObject(jsonObject) {
 }
 
 function displayList(beers) {
-  console.log("beers", beers);
   // clear the list
   document.querySelector("#list").innerHTML = "";
   // build a new list
@@ -266,8 +371,6 @@ function displayList(beers) {
 }
 
 function displayBeer(beer) {
-  console.log("beer", beer);
-
   // create clone
   let clone = document.querySelector("#beer-template").content.cloneNode(true);
   // set clone data
@@ -281,9 +384,4 @@ function displayBeer(beer) {
   clone.querySelector("[data-field=price]").textContent = beer.price + ",0kr.";
   // append clone to list
   document.querySelector("#list").appendChild(clone);
-}
-
-function showBeer(beer) {
-  const template = document.querySelector("#beer").content;
-  const clone = template.cloneNode(true);
 }

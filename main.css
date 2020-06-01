@@ -32,15 +32,10 @@ main {
   width: 100%;
 }
 
-.bartenders {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height: 90%;
-}
 .bartender {
   width: 35%;
   margin: auto;
+  margin-top: 1em;
 }
 .bartender img {
   width: 100%;
@@ -225,4 +220,49 @@ td {
   to {
     transform: translateX(calc(var(--queue-offset) * 1px));
   }
+}
+
+#serving-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 90%;
+}
+
+.serving-ticket {
+  --image-url: url("images/tickets/ticket_00.png");
+  height: 100%;
+  width: 100%;
+  background-image: var(--image-url);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  flex-shrink: 0;
+}
+
+#secondserving1.move,
+#secondserving2.move,
+#secondserving3.move {
+  animation: moveSecondServing 1s ease infinite;
+}
+#serving1.move,
+#serving2.move,
+#serving3.move {
+  animation: moveServing 1s ease infinite;
+}
+
+@keyframes moveSecondServing {
+  to {
+    transform: translateX(-100%);
+  }
+}
+@keyframes moveServing {
+  to {
+    opacity: 0;
+  }
+}
+.serving-section {
+  height: 100%;
+  display: flex;
+  overflow: visible;
 }
