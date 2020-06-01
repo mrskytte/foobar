@@ -63,7 +63,6 @@ function isQueueMoveDone() {
 async function getInitialData() {
   const data = await fetch(endpoint);
   const response = await data.json();
-  console.log("response", response);
 
   const onTap = Object.values(response.taps);
 
@@ -85,7 +84,6 @@ async function getInitialData() {
 }
 
 function prepareNowServing(data) {
-  console.log("data", data);
   nowServing = [...data];
 
   if (nowServing[0]) {
@@ -151,7 +149,7 @@ function updateNowServing(update) {
     console.log("nobody to serve");
     return;
   }
-  nowServing.length = 3;
+  nowServing.push({ id: "empty" });
   if (nowServing[2].id === currentlyNowServing[0].id) {
     console.log("adding two tickets");
     twoNewNowServingEntries();
@@ -459,16 +457,6 @@ async function fetchMenago() {
 }
 
 function prepareManager(menago) {
-  console.log("menago", menago);
-  var closedBar = menago.bar.closingTime;
-  var today = new Date();
-  var time =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  var whatNow = closedBar - time;
-  document.querySelector(
-    "body > main > div.time.small-screen > h1.tillclosing"
-  ).textContent = whatNow;
-
   //table bartenders//
   buildTable(menago.bartenders);
 
@@ -486,18 +474,16 @@ function buildTable(data) {
   table.innerHTML = "";
 
   for (var i = 0; i < data.length; i++) {
-    var row = `<div id="bartender">${data[i].name} ${data[i].status}</div>`;
+    var row = `<div class="small-bartender">${data[i].name} ${data[i].status}</div>`;
 
     table.innerHTML += row;
   }
 }
 
 function getStorage(data) {
-  console.log("storage", data);
   var stock = document.getElementById("STOCK");
   stock.innerHTML = "";
   data.forEach((oneBeer) => {
-    console.log("onebeer", oneBeer);
     let beerImage = "";
     if (oneBeer.name === "El Hefe") {
       beerImage = "elhefe";
@@ -522,19 +508,15 @@ function getStorage(data) {
     }
     var row = `<div id="storage"><img src="images/beers/${beerImage}.png" alt="Beer Label"/><br> ${oneBeer.name}:<br> ${oneBeer.amount}</div>`;
     stock.innerHTML += row;
-
-    console.log("beerimgae", beerImage);
   });
 }
 
 function getTheTap(data) {
-  console.log(data);
   var table = document.getElementById("onTap");
   table.innerHTML = "";
   //let image = "images/beers/" + + ".png";
 
   data.forEach((oneTap) => {
-    console.log("onetap", oneTap);
     let dataImage = "";
     if (oneTap.beer === "El Hefe") {
       dataImage = "elhefe";
@@ -558,7 +540,9 @@ function getTheTap(data) {
       dataImage = "steampunk";
     }
 
-    var row = `<div id="oneTap"><div id="oneTap_img"><img src="images/beers/${dataImage}.png" alt="Beer Label"/></div><div id="oneTap_beer">${oneTap.beer}</div><div id="oneTap_level"ś>${oneTap.level}l</div></div>`;
+    var row = `<div id="oneTap"><div id="oneTap_img"><img src="images/beers/${dataImage}.png" alt="Beer Label"/></div><div id="oneTap_beer">${
+      oneTap.beer
+    }</div><div id="oneTap_level"ś>${oneTap.level / 100} l</div></div>`;
     table.innerHTML += row;
   });
 }

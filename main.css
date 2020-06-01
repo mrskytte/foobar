@@ -10,6 +10,10 @@ body {
   padding: 2em;
 }
 
+h1 {
+  font-size: 1.3vw;
+}
+
 main {
   height: 100%;
   display: grid;
@@ -22,9 +26,6 @@ main {
 }
 
 .box1 {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   background: white;
   grid-area: box1;
   text-align: center;
@@ -32,17 +33,23 @@ main {
   width: 100%;
 }
 
+.box1 > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
 .bartender {
   width: 35%;
   margin: auto;
-  margin-top: 4em;
 }
 .bartender img {
   width: 100%;
 }
 
 .bartender h3 {
-  font-size: 1em;
+  font-size: 0.8vw;
 }
 
 .box2 {
@@ -115,22 +122,18 @@ h1 {
   margin-right: 10%;
 }
 
-.boxheader {
-  margin-top: 8%;
-}
-
 .queue {
   margin: auto;
   margin-right: 10%;
 }
 
 .ontap {
-  font-size: 14px;
+  font-size: 1vw;
   margin-top: 0;
 }
 
 .price {
-  font-size: 14px;
+  font-size: 1vw;
   color: #f0621f;
 }
 
@@ -225,9 +228,9 @@ td {
 #serving-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  height: 90%;
-  margin-top: 4em;
+  justify-content: space-between;
+  height: 100%;
+  margin-top: 1em;
   overflow: hidden;
 }
 
@@ -287,21 +290,9 @@ td {
     display: initial;
   }
 
-  * {
-    background-color: white;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
-  }
-
-  html,
-  body {
-    overflow-x: hidden;
-  }
-
   body {
     position: relative;
+    padding: 0;
   }
 
   .box1,
@@ -322,33 +313,18 @@ td {
   }
 
   .logologo {
-    width: 15%;
-    padding: 1%;
-    margin: 2%;
+    width: 50%;
+    padding: 1em;
     background-color: #2a2723;
   }
 
-  .time {
-    text-align: left;
-    border-bottom: 5px solid #2a2723;
-    background-color: white;
-    padding: 5%;
-  }
-
-  .tillclosing {
-    color: #f0621f;
-  }
-
-  #tillclosing {
-    color: #f0621f;
-  }
-
-  #bartender {
+  .small-bartender {
     margin: 5%;
+    font-size: 1.5em;
   }
 
   #bartenders-wrapper {
-    padding: 5%;
+    padding: 2%;
     border-bottom: 5px solid #2a2723;
   }
 
@@ -379,11 +355,12 @@ td {
   }
 
   #STOCK {
-    display: flex;
-    font-size: 5fr;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    font-size: 1.5em;
     flex-wrap: wrap;
     margin-right: -10px;
-    margin-bottom: -10px;
+    padding-bottom: 2em;
     border-bottom: 5px solid #2a2723;
   }
 
@@ -420,7 +397,7 @@ td {
 
   #oneTap_img > img {
     grid-area: label;
-    width: 100%;
+    width: 50%;
     height: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -428,7 +405,6 @@ td {
 
   #oneTap_img {
     width: 200px;
-    background-color: red;
     display: flex;
   }
 
@@ -437,7 +413,7 @@ td {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 110%;
+    font-size: 1.5em;
   }
 
   #oneTap_level {
@@ -445,6 +421,6 @@ td {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 110%;
+    font-size: 1.5em;
   }
 }
