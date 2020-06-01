@@ -44,37 +44,47 @@ body > main > div.box3 > img {
   background: white;
   grid-area: box4;
   text-align: right;
+  margin: auto;
+  height: 160px;
 }
 
 .box5 {
-  background: white;
   grid-area: box5;
   text-align: right;
   display: grid;
+  margin: auto;
+}
+
+.ontaptoday {
+  margin-right: 20px;
 }
 
 #list {
   display: flex;
-  justify-content: center;
-  margin: auto;
-  align-items: stretch;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: baseline;
+  margin-top: 60px;
+  margin-bottom: 60px;
 }
 
 .beer {
   display: grid;
+  text-align: center;
+  column-gap: 185px;
   grid-template-areas:
     "image image"
     "name name"
-    "type alc"
+    "type type"
+    "alc alc"
     "price price";
 }
 
-#label {
-  size: 30%;
-}
-
-#beer > img {
-  width: 80%;
+.beer > img {
+  grid-area: image;
+  width: 110px;
+  margin: auto;
+  margin-bottom: 15px;
 }
 
 h1,
@@ -88,7 +98,12 @@ h1 {
 }
 
 h2 {
-  margin-top: 10%;
+  margin-top: 8%;
+}
+
+.queue {
+  margin: auto;
+  margin-right: 10%;
 }
 
 .ontap {
@@ -113,7 +128,15 @@ h2 {
   grid-area: type;
 }
 
-tr {
+.beeralc {
+  grid-area: alc;
+}
+
+.beerprice {
+  grid-area: price;
+}
+
+.serving {
   color: #f0621f;
 }
 
@@ -173,14 +196,7 @@ td {
     background-color: #2a2723;
   }
 
-  .time {
-    text-align: center;
-    padding: 1%;
-    margin: 2%;
-    border-bottom: 5px solid #2a2723;
-  }
-
-  .tillclosing {
-    color: #f0621f;
+  template {
+    margin: auto;
   }
 }

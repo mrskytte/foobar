@@ -5,14 +5,13 @@
 #container2 {
   width: 80%;
   margin: auto;
-  margin-top: 10em;
+  margin-top: 4em;
   overflow: hidden;
 }
 #container {
   --queue-offset: -20vh;
   --iterations: 1;
   margin: auto;
-  margin-top: 10em;
   width: 100%;
   display: flex;
   justify-content: space-around;
