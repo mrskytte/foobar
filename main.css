@@ -242,11 +242,6 @@ td {
   flex-shrink: 0;
   transition: opacity 0.5s;
 }
-/* #secondserving1,
-#secondserving2,
-#secondserving3 {
-  opacity: 0;
-} */
 
 #secondserving1.move,
 #secondserving2.move,
@@ -277,4 +272,179 @@ td {
 
 .hide {
   opacity: 0;
+}
+
+.small-screen {
+  display: none;
+}
+
+@media only screen and (max-width: 966px) {
+  .large-screen {
+    display: none;
+  }
+
+  .small-screen {
+    display: initial;
+  }
+
+  * {
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  body {
+    position: relative;
+  }
+
+  .box1,
+  .box2,
+  .box3,
+  .box4,
+  .box5 {
+    display: none;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logo {
+    background-color: #2a2723;
+  }
+
+  .logologo {
+    width: 15%;
+    padding: 1%;
+    margin: 2%;
+    background-color: #2a2723;
+  }
+
+  .time {
+    text-align: left;
+    border-bottom: 5px solid #2a2723;
+    background-color: white;
+    padding: 5%;
+  }
+
+  .tillclosing {
+    color: #f0621f;
+  }
+
+  #tillclosing {
+    color: #f0621f;
+  }
+
+  #bartender {
+    margin: 5%;
+  }
+
+  #bartenders-wrapper {
+    padding: 5%;
+    border-bottom: 5px solid #2a2723;
+  }
+
+  h1 {
+    text-align: center;
+    background-color: white;
+    margin-right: 0;
+  }
+
+  h3 {
+    text-align: right;
+    margin-right: 9%;
+  }
+
+  body > main > div.bartenderino.small-screen {
+    background-color: white;
+    text-align: center;
+    align-self: center;
+    align-content: center;
+    margin: 25%;
+  }
+
+  #STOCK-WRAPPER {
+    height: 100%;
+    width: 100%;
+    padding: 5%;
+    margin: 1%;
+  }
+
+  #STOCK {
+    display: flex;
+    font-size: 5fr;
+    flex-wrap: wrap;
+    margin-right: -10px;
+    margin-bottom: -10px;
+    border-bottom: 5px solid #2a2723;
+  }
+
+  #storage > img {
+    width: 60%;
+    margin: 5%;
+  }
+
+  #storage {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: calc(20%);
+    align-self: center;
+    text-align: center;
+    margin-bottom: 5%;
+  }
+
+  #quantity {
+    margin-top: 5%;
+    margin-bottom: -4%;
+  }
+
+  #onTap_wrapper {
+    padding: 5%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #oneTap {
+    margin-bottom: 5%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #oneTap_img > img {
+    grid-area: label;
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #oneTap_img {
+    width: 200px;
+    background-color: red;
+    display: flex;
+  }
+
+  #oneTap_beer {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 110%;
+  }
+
+  #oneTap_level {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 110%;
+  }
 }

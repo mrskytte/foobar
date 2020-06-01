@@ -317,6 +317,7 @@ async function updateData() {
   const response = await data.json();
   checkQueueProgress(response.queue);
   updateNowServing(response.serving);
+  prepareManager(response);
 }
 
 function checkQueueProgress(queue) {
@@ -337,7 +338,6 @@ function checkQueueProgress(queue) {
   } else if (!lastQueue[0] && currentQueue[0]) {
     //console.log("new entry + old queue empty ");
     lastQueue = [...currentQueue];
-
     updateQueue();
   } else if (lastQueue[0].id !== currentQueue[0].id) {
     if (lastQueue.length < 2) {
@@ -445,4 +445,120 @@ function displayBeer(beer) {
   clone.querySelector("[data-field=price]").textContent = beer.price + ",0kr.";
   // append clone to list
   document.querySelector("#list").appendChild(clone);
+}
+//Setting up the fetching//
+async function fetchMenago() {
+  const data = await fetch(endpoint);
+  const response = await data.json();
+  //console.log(response);
+
+  console.log(
+    `It is ${response.bar.closingTime} and we have ${response.bartenders.length} bartenders: ${response.bartenders[0].name}`
+  );
+  prepareManager(response);
+}
+
+function prepareManager(menago) {
+  console.log("menago", menago);
+  var closedBar = menago.bar.closingTime;
+  var today = new Date();
+  var time =
+    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var whatNow = closedBar - time;
+  document.querySelector(
+    "body > main > div.time.small-screen > h1.tillclosing"
+  ).textContent = whatNow;
+
+  //table bartenders//
+  buildTable(menago.bartenders);
+
+  //stock
+  getStorage(menago.storage);
+
+  //ontap
+  getTheTap(menago.taps);
+  //best_setlling
+}
+
+function buildTable(data) {
+  //console.log(data);
+  var table = document.getElementById("bartenderr");
+  table.innerHTML = "";
+
+  for (var i = 0; i < data.length; i++) {
+    var row = `<div id="bartender">${data[i].name} ${data[i].status}</div>`;
+
+    table.innerHTML += row;
+  }
+}
+
+function getStorage(data) {
+  console.log("storage", data);
+  var stock = document.getElementById("STOCK");
+  stock.innerHTML = "";
+  data.forEach((oneBeer) => {
+    console.log("onebeer", oneBeer);
+    let beerImage = "";
+    if (oneBeer.name === "El Hefe") {
+      beerImage = "elhefe";
+    } else if (oneBeer.name === "Fairy Tale Ale") {
+      beerImage = "bigdaddy";
+    } else if (oneBeer.name === "GitHop") {
+      beerImage = "githop";
+    } else if (oneBeer.name === "Hollaback Lager") {
+      beerImage = "hollaback";
+    } else if (oneBeer.name === "Hoppily Ever After") {
+      beerImage = "hoppilyeverafter";
+    } else if (oneBeer.name === "Mowintime") {
+      beerImage = "mowingtime";
+    } else if (oneBeer.name === "Row 26") {
+      beerImage = "row26";
+    } else if (oneBeer.name === "Ruined Childhood") {
+      beerImage = "ruinedchildhood";
+    } else if (oneBeer.name === "Sleighride") {
+      beerImage = "sleighride";
+    } else if (oneBeer.name === "Steampunk") {
+      beerImage = "steampunk";
+    }
+    var row = `<div id="storage"><img src="images/beers/${beerImage}.png" alt="Beer Label"/><br> ${oneBeer.name}:<br> ${oneBeer.amount}</div>`;
+    stock.innerHTML += row;
+
+    console.log("beerimgae", beerImage);
+  });
+}
+
+function getTheTap(data) {
+  console.log(data);
+  var table = document.getElementById("onTap");
+  table.innerHTML = "";
+  //let image = "images/beers/" + + ".png";
+
+  data.forEach((oneTap) => {
+    console.log("onetap", oneTap);
+    let dataImage = "";
+    if (oneTap.beer === "El Hefe") {
+      dataImage = "elhefe";
+    } else if (oneTap.beer === "Fairy Tale Ale") {
+      dataImage = "bigdaddy";
+    } else if (oneTap.beer === "GitHop") {
+      dataImage = "githop";
+    } else if (oneTap.beer === "Hollaback Lager") {
+      dataImage = "hollaback";
+    } else if (oneTap.beer === "Hoppily Ever After") {
+      dataImage = "hoppilyeverafter";
+    } else if (oneTap.beer === "Mowintime") {
+      dataImage = "mowingtime";
+    } else if (oneTap.beer === "Row 26") {
+      dataImage = "row26";
+    } else if (oneTap.beer === "Ruined Childhood") {
+      dataImage = "ruinedchildhood";
+    } else if (oneTap.beer === "Sleighride") {
+      dataImage = "sleighride";
+    } else if (oneTap.beer === "Steampunk") {
+      dataImage = "steampunk";
+    }
+
+    var row = `<div id="oneTap"><div id="oneTap_img"><img src="images/beers/${dataImage}.png" alt="Beer Label"/></div><div id="oneTap_beer">${oneTap.beer}</div><div id="oneTap_level"ś>${oneTap.level}l</div></div>`;
+    table.innerHTML += row;
+  });
 }
