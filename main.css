@@ -5,11 +5,16 @@
   font-family: "Montserrat", sans-serif;
 }
 
-main {
+body {
   height: 100vh;
+  padding: 2em;
+}
+
+main {
+  height: 100%;
   display: grid;
   grid-template-columns: 1.75fr 1.75fr 6fr;
-  grid-template-rows: 1fr 3fr 2fr;
+  grid-template-rows: 20% 40% 30%;
   grid-template-areas:
     "box1 box2 box3"
     "box1 box2 box4"
@@ -17,9 +22,32 @@ main {
 }
 
 .box1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: white;
   grid-area: box1;
   text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+.bartenders {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 90%;
+}
+.bartender {
+  width: 35%;
+  margin: auto;
+}
+.bartender img {
+  width: 100%;
+}
+
+.bartender h3 {
+  font-size: 1em;
 }
 
 .box2 {
@@ -45,7 +73,8 @@ body > main > div.box3 > img {
   grid-area: box4;
   text-align: right;
   margin: auto;
-  height: 160px;
+  height: 100%;
+  width: 100%;
 }
 
 .box5 {
@@ -64,8 +93,7 @@ body > main > div.box3 > img {
   justify-content: space-between;
   flex-direction: row;
   align-items: baseline;
-  margin-top: 60px;
-  margin-bottom: 60px;
+  margin-top: 1em;
 }
 
 .beer {
@@ -82,14 +110,9 @@ body > main > div.box3 > img {
 
 .beer > img {
   grid-area: image;
-  width: 110px;
+  width: 60%;
   margin: auto;
   margin-bottom: 15px;
-}
-
-h1,
-h2 {
-  padding: 1%;
 }
 
 h1 {
@@ -97,7 +120,7 @@ h1 {
   margin-right: 10%;
 }
 
-h2 {
+.boxheader {
   margin-top: 8%;
 }
 
@@ -145,58 +168,61 @@ td {
   padding: 2%;
 }
 
-@media only screen and (max-width: 966px) {
-  * {
-    background-color: lightblue;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
-  }
+#container2 {
+  width: 100%;
+  margin: auto;
+  height: 100%;
+  overflow: hidden;
+}
+#container {
+  --queue-offset: -20vh;
+  --iterations: 1;
+  margin: auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+  align-items: center;
+}
 
-  html,
-  body {
-    overflow-x: hidden;
-  }
+.queue-entry {
+  --image-url: url("images/tickets/ticket_00.png");
+  height: 100%;
+  width: 90%;
+  margin: 1em;
+  opacity: 1;
+  background-image: var(--image-url);
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* transition: opacity 0.5s; */
+}
 
-  body {
-    position: relative;
-  }
+.move-queue {
+  animation: moveQueue 1s var(--iterations) ease;
+}
 
-  .box1,
-  .box2,
-  .box3,
-  .box4,
-  .box5 {
-    display: none;
-  }
+.show-queue {
+  animation: showQueue 1s ease forwards;
+}
 
-  main {
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 4fr 4fr 6fr 6fr;
-    grid-template-areas:
-      "logo"
-      "time"
-      "bartenderino"
-      "stock"
-      "ontap"
-      "bestselling";
-  }
+.hide-queue {
+  opacity: 0.1;
+}
 
-  .logo {
-    background-color: #2a2723;
+@keyframes showQueue {
+  from {
+    opacity: 0;
   }
-
-  .logologo {
-    width: 30%;
-    padding: 1%;
-    margin: 2%;
-    background-color: #2a2723;
+  to {
+    opacity: 1;
   }
+}
 
-  template {
-    margin: auto;
+@keyframes moveQueue {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(var(--queue-offset) * 1px));
   }
 }

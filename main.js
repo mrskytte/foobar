@@ -58,6 +58,7 @@ function isQueueMoveDone() {
 async function getInitialQueue() {
   const data = await fetch(endpoint);
   const response = await data.json();
+
   const onTap = Object.values(response.taps);
 
   const beersData = await fetch("beers.json");
@@ -88,9 +89,10 @@ function prepareQueue() {
   domTickets.forEach((ticket) => ticket.classList.add("hide-queue"));
 
   for (let i = 0; i < currentQueue.length; i++) {
+    const n = currentQueue[i].id.toString().length - 2;
     const id =
       currentQueue[i].id > 100
-        ? currentQueue[i].id.toString().substring(1)
+        ? currentQueue[i].id.toString().substring(n)
         : currentQueue[i].id;
 
     if (id !== "hideme") {
@@ -99,29 +101,28 @@ function prepareQueue() {
       queue[i].classList.add("hide-queue");
     }
 
-    if (
-      queue[i].querySelector("p").textContent === "hideme" &&
-      id !== "hideme"
-    ) {
+    if (queue[i].dataset.id === "hideme" && id !== "hideme") {
       queue[i].classList.add("show-queue");
       setTimeout(() => queue[i].classList.remove("show-queue"), 1000);
     }
 
-    queue[i].querySelector("p").textContent = id;
-
-    // if (queue[i].querySelector("p").textContent === "hideme") {
-    //   queue[i].classList.add("hide-queue");
-    // }
+    queue[i].dataset.id = id;
+    queue[i].style.setProperty(
+      "--image-url",
+      `url('images/tickets/ticket_${id}.png')`
+    );
   }
 }
 
 function fillOutQueueArray() {
-  if (currentQueue.length < 10) {
-    for (let i = currentQueue.length; i < 9; i++) {
-      currentQueue.push({ id: "hideme" });
+  if (currentQueue.length < 7) {
+    for (let i = currentQueue.length; i < 6; i++) {
+      currentQueue.push({
+        id: "hideme",
+      });
     }
   }
-  currentQueue.length = 9;
+  currentQueue.length = 6;
 }
 
 function startSystem() {
@@ -136,21 +137,21 @@ async function fetchQueue() {
 
 function checkQueueProgress(queue) {
   currentQueue = [...queue];
-  console.log("last", lastQueue);
-  console.log("current", currentQueue);
+  //console.log("last", lastQueue);
+  //console.log("current", currentQueue);
   if (lastQueue.length < currentQueue.length) {
-    console.log("adding new entries");
+    //console.log("adding new entries");
     prepareQueue();
   }
   if (!currentQueue[0] && !lastQueue[0]) {
-    console.log("empty arrays and nothing new");
+    //console.log("empty arrays and nothing new");
   } else if (!currentQueue[0] && lastQueue[0]) {
-    console.log("Queue emptied out");
+    //console.log("Queue emptied out");
     setIterations(lastQueue.length);
     lastQueue = [...currentQueue];
     updateQueue();
   } else if (!lastQueue[0] && currentQueue[0]) {
-    console.log("new entry + old queue empty ");
+    //console.log("new entry + old queue empty ");
     lastQueue = [...currentQueue];
 
     updateQueue();
@@ -163,10 +164,10 @@ function checkQueueProgress(queue) {
     }
     lastQueue = [...currentQueue];
 
-    console.log("new entry");
+    //console.log("new entry");
     updateQueue();
   } else if (lastQueue[0].id === currentQueue[0].id) {
-    console.log("no change");
+    //console.log("no change");
   } else {
     lastQueue = [...currentQueue];
 
@@ -186,7 +187,7 @@ function setIterations(iterations) {
 }
 
 function moveQueue() {
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < 6; i++) {
     const thisTicket = document.getElementById(`ticket${1 + i}`);
     changeTicketId(thisTicket, i);
     showActiveTickets(thisTicket);
@@ -194,19 +195,25 @@ function moveQueue() {
 }
 
 function changeTicketId(thisTicket, i) {
+  console.log(i, thisTicket);
+  const n = currentQueue[i].id.toString().length - 2;
   const id =
     currentQueue[i].id > 100
-      ? currentQueue[i].id.toString().substring(1)
+      ? currentQueue[i].id.toString().substring(n)
       : currentQueue[i].id;
-  console.log(id);
-  thisTicket.querySelector("p").textContent = id;
+
+  thisTicket.dataset.id = id;
+  thisTicket.style.setProperty(
+    "--image-url",
+    `url('images/tickets/ticket_${id}.png')`
+  );
 }
 
 function showActiveTickets() {
   domTickets.forEach((ticket) => ticket.classList.add("hide-queue"));
   setTimeout(() =>
     domTickets.forEach((ticket) => {
-      if (ticket.querySelector("p").textContent !== "hideme") {
+      if (ticket.dataset.id !== "hideme") {
         ticket.classList.remove("hide-queue");
       }
     })
