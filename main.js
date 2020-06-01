@@ -116,28 +116,61 @@ function displayNowServing(bartender, bartenderNumber) {
   servingTicket.style.setProperty("--image-url", imgUrl);
 }
 
+function displayNewNowServing(bartender, bartenderNumber) {
+  const servingTicket = document.querySelector(`#serving${bartenderNumber}`);
+  const secondServingTicket = document.querySelector(
+    `#secondserving${bartenderNumber}`
+  );
+  const n = bartender[0].id.toString().length - 2;
+  const id =
+    bartender[0].id > 100
+      ? bartender[0].id.toString().substring(n)
+      : bartender[0].id;
+  const imgUrl = `url('images/tickets/ticket_${id}.png')`;
+  secondServingTicket.style.setProperty("--image-url", imgUrl);
+  startServingMotion();
+  servingTicket.addEventListener("animationend", moveServingData);
+  function startServingMotion() {
+    secondServingTicket.classList.add("move");
+    servingTicket.classList.add("move");
+    servingTicket.classList.remove("hide");
+  }
+  function moveServingData() {
+    servingTicket.style.setProperty("--image-url", imgUrl);
+    secondServingTicket.classList.remove("move");
+    servingTicket.classList.remove("move");
+    servingTicket.removeEventListener("animationend", moveServingData);
+  }
+}
+
 function updateNowServing(update) {
   currentlyNowServing = [...update];
   if (currentlyNowServing.length < 3) {
+    console.log("currentlyNowServing", currentlyNowServing);
+    removeNowServingTicket();
     console.log("nobody to serve");
-    console.log("bar 1", bartenderOneServing);
-    console.log("bar 2", bartenderTwoServing);
-    console.log("bar 3", bartenderThreeServing);
-  } else if (
-    JSON.stringify(currentlyNowServing) === JSON.stringify(nowServing)
-  ) {
-    console.log("the same");
-  } else if (
-    nowServing[0].id === currentlyNowServing[0].id &&
-    nowServing[1].id === currentlyNowServing[1].id
-  ) {
-    oneNewNowServingEntry();
-  } else if (nowServing[0].id === currentlyNowServing[0].id) {
-    oneNewNowServingEntry();
-  } else if (nowServing[1].id === currentlyNowServing[0].id) {
-    oneNewNowServingEntry();
-  } else if (nowServing[2].id === currentlyNowServing[0].id) {
+    return;
+  }
+  nowServing.length = 3;
+  if (nowServing[2].id === currentlyNowServing[0].id) {
+    console.log("adding two tickets");
     twoNewNowServingEntries();
+
+    // } else if (
+    //   nowServing[0].id === currentlyNowServing[0].id &&
+    //   nowServing[1].id === currentlyNowServing[1].id
+    // ) {
+    //   oneNewNowServingEntry();
+    // } else if (nowServing[0].id === currentlyNowServing[0].id) {
+    //   oneNewNowServingEntry();
+    // } else if (nowServing[1].id === currentlyNowServing[0].id) {
+    //   oneNewNowServingEntry();
+  } else if (
+    JSON.stringify(currentlyNowServing) !== JSON.stringify(nowServing)
+  ) {
+    console.log("adding one tickets");
+
+    oneNewNowServingEntry();
   }
   nowServing = [...currentlyNowServing];
 }
@@ -149,7 +182,7 @@ function twoNewNowServingEntries() {
   ) {
     bartenderOneServing.unshift(currentlyNowServing[counter]);
     bartenderOneServing.pop();
-    displayNowServing(bartenderOneServing, 1);
+    displayNewNowServing(bartenderOneServing, 1);
     counter++;
     console.log("two new Order one", bartenderOneServing[0].id);
   }
@@ -158,7 +191,7 @@ function twoNewNowServingEntries() {
   ) {
     bartenderTwoServing.unshift(currentlyNowServing[counter]);
     bartenderTwoServing.pop();
-    displayNowServing(bartenderTwoServing, 2);
+    displayNewNowServing(bartenderTwoServing, 2);
     console.log("two new Order two", bartenderTwoServing[0].id);
     counter++;
   }
@@ -169,7 +202,7 @@ function twoNewNowServingEntries() {
   ) {
     bartenderThreeServing.unshift(currentlyNowServing[counter]);
     bartenderThreeServing.pop();
-    displayNowServing(bartenderThreeServing, 3);
+    displayNewNowServing(bartenderThreeServing, 3);
     counter++;
     console.log("two new Order three", bartenderThreeServing[0].id);
   }
@@ -181,14 +214,14 @@ function oneNewNowServingEntry() {
   ) {
     bartenderOneServing.unshift(currentlyNowServing[2]);
     bartenderOneServing.pop();
-    displayNowServing(bartenderOneServing, 1);
+    displayNewNowServing(bartenderOneServing, 1);
     console.log("new Order one", bartenderOneServing[0].id);
   } else if (
     !currentlyNowServing.some((order) => order.id === bartenderTwoServing[0].id)
   ) {
     bartenderTwoServing.unshift(currentlyNowServing[2]);
     bartenderTwoServing.pop();
-    displayNowServing(bartenderTwoServing, 2);
+    displayNewNowServing(bartenderTwoServing, 2);
     console.log("new Order two", bartenderTwoServing[0].id);
   } else if (
     !currentlyNowServing.some(
@@ -197,8 +230,36 @@ function oneNewNowServingEntry() {
   ) {
     bartenderThreeServing.unshift(currentlyNowServing[2]);
     bartenderThreeServing.pop();
-    displayNowServing(bartenderThreeServing, 3);
+    displayNewNowServing(bartenderThreeServing, 3);
     console.log("new Order three", bartenderThreeServing[0].id);
+  }
+}
+
+function removeNowServingTicket() {
+  if (
+    !currentlyNowServing.some((order) => order.id === bartenderOneServing[0].id)
+  ) {
+    bartenderOneServing.unshift({ id: "empty" });
+    bartenderOneServing.pop();
+    document.querySelector(`#serving1`).classList.add("hide");
+    console.log("ticket removed 1");
+  } else if (
+    !currentlyNowServing.some((order) => order.id === bartenderTwoServing[0].id)
+  ) {
+    bartenderTwoServing.unshift({ id: "empty" });
+    bartenderTwoServing.pop();
+    document.querySelector(`#serving2`).classList.add("hide");
+
+    console.log("ticket removed 2");
+  } else if (
+    !currentlyNowServing.some(
+      (order) => order.id === bartenderThreeServing[0].id
+    )
+  ) {
+    bartenderThreeServing.unshift({ id: "empty" });
+    bartenderThreeServing.pop();
+    document.querySelector(`#serving3`).classList.add("hide");
+    console.log("ticket removed 3");
   }
 }
 
