@@ -55,6 +55,18 @@ body>main>div.box3>img {
 
 #list {
     display: flex;
+    justify-content: center;
+    margin: auto;
+    align-items: stretch;
+}
+
+.beer {
+    display: grid;
+    grid-template-areas:
+        "image image"
+        "name name"
+        "type alc"
+        "price price";
 }
 
 #label {
@@ -77,6 +89,36 @@ h1 {
 
 h2 {
     margin-top: 10%;
+}
+
+.ontap {
+    font-size: 14px;
+    margin-top: 0;
+}
+
+.price {
+    font-size: 14px;
+    color: #f0621f;
+}
+
+.beerimage {
+    grid-area: image;
+}
+
+.beername {
+    grid-area: name;
+}
+
+.beertype {
+    grid-area: type;
+}
+
+.beeralc {
+    grid-area: alc;
+}
+
+.beerprice {
+    grid-area: price;
 }
 
 .serving {
@@ -105,9 +147,21 @@ td {
     padding: 2%;
 }
 
+.small-screen {
+    display: none;
+}
+
 @media only screen and (max-width: 966px) {
+    .large-screen {
+        display: none;
+    }
+
+    .small-screen {
+        display: initial;
+    }
+
     * {
-        background-color: lightblue;
+        background-color: white;
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -161,9 +215,73 @@ td {
         padding: 1%;
         margin: 2%;
         border-bottom: 5px solid #2a2723;
+        background-color: white;
     }
 
     .tillclosing {
         color: #f0621f;
     }
+
+    h1 {
+        text-align: center;
+        background-color: white;
+    }
+
+    h3 {
+        text-align: right;
+        margin-right: 9%;
+    }
+
+    body>main>div.bartenderino.small-screen {
+        background-color: white;
+        margin: 15%;
+    }
+
+    body>main>div.bartenderino.small-screen>h1 {
+        text-align: center;
+        padding: 10%;
+    }
+
+    #myTable {
+        background-color: white;
+        text-align: left;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 15%;
+    }
+
+    body>main>div.bartenderino.small-screen>table>tbody:nth-child(1) {
+        background-color: white;
+        text-align: left;
+    }
+
+    th,
+    td {
+        background-color: white;
+        text-align: center;
+    }
+
+    th {
+        color: black;
+    }
+
+    #myTable>tr:nth-child(3)>td:nth-child(1),
+    #myTable>tr:nth-child(2)>td:nth-child(1),
+    #myTable>tr:nth-child(1)>td:nth-child(1) {
+        color: black;
+    }
+
+    body>main>div.ontap.small-screen>table {
+        background-color: violet;
+        margin: 0px auto;
+    }
+
+    #myTaps>tr:nth-child(1)>td:nth-child(1) {
+        margin: 0%;
+    }
+
+    .label {
+        width: 30%;
+    }
+
 }
