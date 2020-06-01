@@ -3,9 +3,10 @@
   margin: 0;
 }
 #container2 {
-  width: 80%;
+  width: 100%;
   margin: auto;
-  margin-top: 4em;
+  height: 100%;
+  margin-bottom: 10em;
   overflow: hidden;
 }
 #container {
@@ -13,19 +14,23 @@
   --iterations: 1;
   margin: auto;
   width: 100%;
+  padding-bottom: 10em;
+
   display: flex;
   justify-content: space-around;
-  height: 10vh;
+  height: 100%;
   align-items: center;
 }
 
 .queue-entry {
-  flex-shrink: 0;
-  height: 10vh;
-  width: 10vh;
+  --image-url: url("images/tickets/ticket_00.png");
+  height: 100%;
+  width: 100%;
   margin: 1em;
-  border: 1px solid black;
   opacity: 1;
+  background-image: var(--image-url);
+  background-size: contain;
+  background-repeat: no-repeat;
   /* transition: opacity 0.5s; */
 }
 

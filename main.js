@@ -231,7 +231,6 @@ async function loadJSON() {
 
 function prepareObjects(jsonData) {
   allBeers = jsonData.map(prepareObject);
-  console.log("allbeer", allBeers);
   // TODO: This might not be the function we want to call first
   displayList(allBeers);
 }
