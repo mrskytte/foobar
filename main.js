@@ -135,6 +135,7 @@ async function fetchQueue() {
     const data = await fetch(endpoint);
     const response = await data.json();
     checkQueueProgress(response.queue);
+    prepareManager(response);
 }
 
 function checkQueueProgress(queue) {
@@ -315,87 +316,89 @@ function prepareManager(menago) {
 
 function buildTable(data) {
     //console.log(data);
-    var table = document.getElementById('myTable');
+    var table = document.getElementById('bartenderr');
+    table.innerHTML = ""
 
     for (var i = 0; i < data.length; i++) {
-        var row = `<tr>
-        <td>${data[i].name}</td>
-        <td>${data[i].status}</td>
-        </tr>`
+        var row = `<div id="bartender">${data[i].name} ${data[i].status}</div>`
 
         table.innerHTML += row
     }
 }
 
+function updateTable(data) {
+
+}
+
 function getStorage(data) {
-    console.log(data);
+    console.log("storage", data);
     var stock = document.getElementById('STOCK');
-
-    if (stock.name !== "El Hefe") {
-        stock.image = "elhefe"
-    } else if (stock.name !== "Fairy Tale Ale") {
-        stock.image = "bigdaddy"
-    } else if (stock.name !== "GitHop") {
-        stock.image = "githop"
-    } else if (stock.name !== "Hollaback Lager") {
-        stock.image = "hollaback"
-    } else if (stock.name !== "Hoppily Ever After") {
-        stock.image = "hoppilyeverafter"
-    } else if (stock.name !== "Mowintime") {
-        stock.image = "mowingtime"
-    } else if (stock.name !== "Row 26") {
-        stock.image = "row26"
-    } else if (stock.name !== "Ruined Childhood") {
-        stock.image = "ruinedchildhood"
-    } else if (stock.name !== "Sleighride") {
-        stock.image = "sleighride"
-    } else if (stock.name !== "Steampunk") {
-        stock.image = "steampunk"
-    }
-
-
-    for (var i = 0; i < data.length; i++) {
-        var row = `'<td>images/beers/${stock.image}.png" alt="Beer Label" class="label", ${data[i].name}, ${data[i].amount}</td>`
-
+    stock.innerHTML = ""
+    data.forEach((oneBeer) => {
+        console.log('onebeer', oneBeer)
+        let beerImage = ""
+        if (oneBeer.name === "El Hefe") {
+            beerImage = "elhefe"
+        } else if (oneBeer.name === "Fairy Tale Ale") {
+            beerImage = "bigdaddy"
+        } else if (oneBeer.name === "GitHop") {
+            beerImage = "githop"
+        } else if (oneBeer.name === "Hollaback Lager") {
+            beerImage = "hollaback"
+        } else if (oneBeer.name === "Hoppily Ever After") {
+            beerImage = "hoppilyeverafter"
+        } else if (oneBeer.name === "Mowintime") {
+            beerImage = "mowingtime"
+        } else if (oneBeer.name === "Row 26") {
+            beerImage = "row26"
+        } else if (oneBeer.name === "Ruined Childhood") {
+            beerImage = "ruinedchildhood"
+        } else if (oneBeer.name === "Sleighride") {
+            beerImage = "sleighride"
+        } else if (oneBeer.name === "Steampunk") {
+            beerImage = "steampunk"
+        }
+        var row = `<div id="storage"><img src="images/beers/${beerImage}.png" alt="Beer Label"/><br> ${oneBeer.name}:<br> ${oneBeer.amount}</div>`
         stock.innerHTML += row
-    }
+
+        console.log("beerimgae", beerImage)
+    })
 }
 
 function getTheTap(data) {
     console.log(data);
-    var table = document.getElementById('myTaps');
+    var table = document.getElementById('onTap');
+    table.innerHTML = ""
     //let image = "images/beers/" + + ".png";
 
-    if (data.beer = "El Hefe") {
-        data.image = "elhefe"
-    } else if (data.beer = "Fairy Tale Ale") {
-        data.image = "bigdaddy"
-    } else if (data.beer = "GitHop") {
-        data.image = "githop"
-    } else if (data.beer = "Hollaback Lager") {
-        data.image = "hollaback"
-    } else if (data.beer = "Hoppily Ever After") {
-        data.image = "hoppilyeverafter"
-    } else if (data.beer = "Mowintime") {
-        data.image = "mowingtime"
-    } else if (data.beer = "Row 26") {
-        data.image = "row26"
-    } else if (data.beer = "Ruined Childhood") {
-        data.image = "ruinedchildhood"
-    } else if (data.beer = "Sleighride") {
-        data.image = "sleighride"
-    } else //(data.beer = "Steampunk") {
-    {
-        data.image = "steampunk"
-    }
+    data.forEach((oneTap) => {
+        console.log('onetap', oneTap)
+        let dataImage = ""
+        if (oneTap.beer === "El Hefe") {
+            dataImage = "elhefe"
+        } else if (oneTap.beer === "Fairy Tale Ale") {
+            dataImage = "bigdaddy"
+        } else if (oneTap.beer === "GitHop") {
+            dataImage = "githop"
+        } else if (oneTap.beer === "Hollaback Lager") {
+            dataImage = "hollaback"
+        } else if (oneTap.beer === "Hoppily Ever After") {
+            dataImage = "hoppilyeverafter"
+        } else if (oneTap.beer === "Mowintime") {
+            dataImage = "mowingtime"
+        } else if (oneTap.beer === "Row 26") {
+            dataImage = "row26"
+        } else if (oneTap.beer === "Ruined Childhood") {
+            dataImage = "ruinedchildhood"
+        } else if (oneTap.beer === "Sleighride") {
+            dataImage = "sleighride"
+        } else if (oneTap.beer === "Steampunk") {
+            dataImage = "steampunk"
+        }
 
-    for (var i = 0; i < data.length; i++) {
-        var row = `<tr>
-        <td><img src="images/beers/${data.image}.png" alt="Beer Label" class="label" /></td>
-        <td>${data[i].beer}</td>
-        <td>${data[i].level} out of ${data[i].capacity}</td>
-        </tr>`
+        var row = `<div id="oneTap"><div id="oneTap_img"><img src="images/beers/${dataImage}.png" alt="Beer Label"/></div><div id="oneTap_beer">${oneTap.beer}</div><div id="oneTap_level"ś>${oneTap.level}l</div></div>`
+
 
         table.innerHTML += row
-    }
+    })
 }

@@ -186,17 +186,8 @@ td {
     }
 
     main {
-        height: 100vh;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr 4fr 4fr 6fr 6fr;
-        grid-template-areas:
-            "logo"
-            "time"
-            "bartenderino"
-            "stock"
-            "ontap"
-            "bestselling";
+        display: flex;
+        flex-direction: column;
     }
 
     .logo {
@@ -204,27 +195,41 @@ td {
     }
 
     .logologo {
-        width: 30%;
+        width: 15%;
         padding: 1%;
         margin: 2%;
         background-color: #2a2723;
     }
 
+
     .time {
-        text-align: center;
-        padding: 1%;
-        margin: 2%;
+        text-align: left;
         border-bottom: 5px solid #2a2723;
         background-color: white;
+        padding: 5%;
     }
 
     .tillclosing {
         color: #f0621f;
     }
 
+    #tillclosing {
+        color: #f0621f;
+    }
+
+    #bartender {
+        margin: 5%;
+    }
+
+    #bartenders-wrapper {
+        padding: 5%;
+        border-bottom: 5px solid #2a2723;
+    }
+
     h1 {
         text-align: center;
         background-color: white;
+        margin-right: 0;
     }
 
     h3 {
@@ -234,54 +239,87 @@ td {
 
     body>main>div.bartenderino.small-screen {
         background-color: white;
-        margin: 15%;
-    }
-
-    body>main>div.bartenderino.small-screen>h1 {
         text-align: center;
-        padding: 10%;
+        align-self: center;
+        align-content: center;
+        margin: 25%;
     }
 
-    #myTable {
-        background-color: white;
-        text-align: left;
+    #STOCK-WRAPPER {
+        height: 100%;
+        width: 100%;
+        padding: 5%;
+        margin: 1%;
+    }
+
+    #STOCK {
+        display: flex;
+        font-size: 5fr;
+        flex-wrap: wrap;
+        margin-right: -10px;
+        margin-bottom: -10px;
+        border-bottom: 5px solid #2a2723;
+    }
+
+    #storage>img {
+        width: 60%;
+        margin: 5%;
+    }
+
+    #storage {
+        flex-grow: 1;
+        flex-shrink: 0;
+        flex-basis: calc(20%);
+        align-self: center;
+        text-align: center;
+        margin-bottom: 5%;
+    }
+
+    #quantity {
+        margin-top: 5%;
+        margin-bottom: -4%;
+    }
+
+    #onTap_wrapper {
+        padding: 5%;
         margin-left: auto;
         margin-right: auto;
-        padding: 15%;
     }
 
-    body>main>div.bartenderino.small-screen>table>tbody:nth-child(1) {
-        background-color: white;
-        text-align: left;
+    #oneTap {
+        margin-bottom: 5%;
+        display: flex;
+        justify-content: space-between;
     }
 
-    th,
-    td {
-        background-color: white;
-        text-align: center;
+    #oneTap_img>img {
+        grid-area: label;
+        width: 100%;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto
     }
 
-    th {
-        color: black;
+    #oneTap_img {
+        width: 200px;
+        background-color: red;
+        display: flex;
     }
 
-    #myTable>tr:nth-child(3)>td:nth-child(1),
-    #myTable>tr:nth-child(2)>td:nth-child(1),
-    #myTable>tr:nth-child(1)>td:nth-child(1) {
-        color: black;
+    #oneTap_beer {
+        width: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 110%;
     }
 
-    body>main>div.ontap.small-screen>table {
-        background-color: violet;
-        margin: 0px auto;
-    }
-
-    #myTaps>tr:nth-child(1)>td:nth-child(1) {
-        margin: 0%;
-    }
-
-    .label {
-        width: 30%;
+    #oneTap_level {
+        width: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 110%;
     }
 
 }
