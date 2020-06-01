@@ -85,7 +85,7 @@ body > main > div.box3 > img {
 }
 
 .ontaptoday {
-  margin-right: 20px;
+  margin-right: 8%;
 }
 
 #list {
@@ -99,7 +99,7 @@ body > main > div.box3 > img {
 .beer {
   display: grid;
   text-align: center;
-  column-gap: 185px;
+  width: 100%;
   grid-template-areas:
     "image image"
     "name name"
