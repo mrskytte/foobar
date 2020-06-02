@@ -583,5 +583,7 @@ function setMostWanted() {
   document
     .querySelectorAll(".beer")
     .forEach((beer) => beer.classList.remove("most-wanted"));
-  document.querySelector(`#${beerCount[9].name}`).classList.add("most-wanted");
+  document
+    .querySelector(`#${beerCount[9].name.replace(/\s+/g, "")}`)
+    .classList.add("most-wanted");
 }
