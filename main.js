@@ -63,10 +63,7 @@ function isQueueMoveDone() {
 async function getInitialData() {
   const data = await fetch(endpoint);
   const response = await data.json();
-  console.log("response", response);
-
   const onTap = Object.values(response.taps);
-
   const beersData = await fetch("beers.json");
   const beersResponse = await beersData.json();
 
@@ -151,16 +148,22 @@ function updateNowServing(update) {
     console.log("nobody to serve");
     return;
   }
-  nowServing.push({ id: "empty" });
+  if (nowServing.length < 3) {
+    nowServing.push({ id: "empty" });
+  }
+  console.log(JSON.stringify(nowServing));
   if (nowServing[2].id === currentlyNowServing[0].id) {
     console.log("adding two tickets");
     twoNewNowServingEntries();
   } else if (
     JSON.stringify(currentlyNowServing) !== JSON.stringify(nowServing)
   ) {
+    console.log("current", JSON.stringify(currentlyNowServing));
+    console.log("lastwws", JSON.stringify(nowServing));
     console.log("adding one tickets");
-
     oneNewNowServingEntry();
+  } else {
+    console.log("nothing new to add");
   }
   nowServing = [...currentlyNowServing];
 }
@@ -173,6 +176,7 @@ function twoNewNowServingEntries() {
     bartenderOneServing.unshift(currentlyNowServing[counter]);
     bartenderOneServing.pop();
     displayNewNowServing(bartenderOneServing, 1);
+    document.querySelector(`#serving1`).classList.add("remove");
     counter++;
     console.log("two new Order one", bartenderOneServing[0].id);
   }
@@ -183,6 +187,7 @@ function twoNewNowServingEntries() {
     bartenderTwoServing.pop();
     displayNewNowServing(bartenderTwoServing, 2);
     console.log("two new Order two", bartenderTwoServing[0].id);
+    document.querySelector(`#serving2`).classList.add("remove");
     counter++;
   }
   if (
@@ -193,6 +198,7 @@ function twoNewNowServingEntries() {
     bartenderThreeServing.unshift(currentlyNowServing[counter]);
     bartenderThreeServing.pop();
     displayNewNowServing(bartenderThreeServing, 3);
+    document.querySelector(`#serving3`).classList.add("remove");
     counter++;
     console.log("two new Order three", bartenderThreeServing[0].id);
   }
@@ -205,6 +211,8 @@ function oneNewNowServingEntry() {
     bartenderOneServing.unshift(currentlyNowServing[2]);
     bartenderOneServing.pop();
     displayNewNowServing(bartenderOneServing, 1);
+    document.querySelector(`#serving1`).classList.remove("hide");
+
     console.log("new Order one", bartenderOneServing[0].id);
   } else if (
     !currentlyNowServing.some((order) => order.id === bartenderTwoServing[0].id)
@@ -212,6 +220,8 @@ function oneNewNowServingEntry() {
     bartenderTwoServing.unshift(currentlyNowServing[2]);
     bartenderTwoServing.pop();
     displayNewNowServing(bartenderTwoServing, 2);
+    document.querySelector(`#serving2`).classList.add("remove");
+
     console.log("new Order two", bartenderTwoServing[0].id);
   } else if (
     !currentlyNowServing.some(
@@ -221,6 +231,7 @@ function oneNewNowServingEntry() {
     bartenderThreeServing.unshift(currentlyNowServing[2]);
     bartenderThreeServing.pop();
     displayNewNowServing(bartenderThreeServing, 3);
+    document.querySelector(`#serving3`).classList.add("remove");
     console.log("new Order three", bartenderThreeServing[0].id);
   }
 }
@@ -559,8 +570,6 @@ let beerCount = [
 let lastCount = 0;
 
 function countBeers(orders) {
-  console.log(lastCount);
-  console.log(orders);
   orders.forEach((order) => {
     if (order.id > lastCount) {
       order.order.forEach((beer) =>
@@ -579,7 +588,6 @@ function countBeers(orders) {
 
 function setMostWanted() {
   beerCount.sort((a, b) => a.amount - b.amount);
-  console.log(beerCount[9].name);
   document
     .querySelectorAll(".beer")
     .forEach((beer) => beer.classList.remove("most-wanted"));
