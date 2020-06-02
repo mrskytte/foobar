@@ -63,6 +63,7 @@ function isQueueMoveDone() {
 async function getInitialData() {
   const data = await fetch(endpoint);
   const response = await data.json();
+  console.log("response", response);
 
   const onTap = Object.values(response.taps);
 
@@ -81,6 +82,7 @@ async function getInitialData() {
   prepareNowServing(response.serving);
   prepareQueue();
   startSystem();
+  countBeers(response.queue);
 }
 
 function prepareNowServing(data) {
@@ -153,16 +155,6 @@ function updateNowServing(update) {
   if (nowServing[2].id === currentlyNowServing[0].id) {
     console.log("adding two tickets");
     twoNewNowServingEntries();
-
-    // } else if (
-    //   nowServing[0].id === currentlyNowServing[0].id &&
-    //   nowServing[1].id === currentlyNowServing[1].id
-    // ) {
-    //   oneNewNowServingEntry();
-    // } else if (nowServing[0].id === currentlyNowServing[0].id) {
-    //   oneNewNowServingEntry();
-    // } else if (nowServing[1].id === currentlyNowServing[0].id) {
-    //   oneNewNowServingEntry();
   } else if (
     JSON.stringify(currentlyNowServing) !== JSON.stringify(nowServing)
   ) {
@@ -316,6 +308,7 @@ async function updateData() {
   checkQueueProgress(response.queue);
   updateNowServing(response.serving);
   prepareManager(response);
+  countBeers(response.queue);
 }
 
 function checkQueueProgress(queue) {
@@ -437,6 +430,9 @@ function displayBeer(beer) {
   clone.querySelector(".beer > img").src = beer.image;
 
   //clone.querySelector("[data-field=image]").textContent = beer.image;
+  clone
+    .querySelector(".beer")
+    .setAttribute("id", beer.name.replace(/\s+/g, ""));
   clone.querySelector("[data-field=name]").textContent = beer.name;
   clone.querySelector("[data-field=type]").textContent = beer.type;
   clone.querySelector("[data-field=alc]").textContent = beer.alc + "%";
@@ -545,4 +541,47 @@ function getTheTap(data) {
     }</div><div id="oneTap_level"ś>${oneTap.level / 100} l</div></div>`;
     table.innerHTML += row;
   });
+}
+
+let beerCount = [
+  { name: "El Hefe", amount: 0 },
+  { name: "Fairy Tale Ale", amount: 0 },
+  { name: "GitHop", amount: 0 },
+  { name: "Hollaback Lager", amount: 0 },
+  { name: "Hoppily Ever After", amount: 0 },
+  { name: "Mowintime", amount: 0 },
+  { name: "Row 26", amount: 0 },
+  { name: "Ruined Childhood", amount: 0 },
+  { name: "Sleighride", amount: 0 },
+  { name: "Steampunk", amount: 0 },
+];
+
+let lastCount = 0;
+
+function countBeers(orders) {
+  console.log(lastCount);
+  console.log(orders);
+  orders.forEach((order) => {
+    if (order.id > lastCount) {
+      order.order.forEach((beer) =>
+        beerCount.map((beerCount) => {
+          if (beer === beerCount.name) {
+            beerCount.amount++;
+          }
+          return { name: beerCount.name, amount: beerCount.amount };
+        })
+      );
+    }
+    lastCount = order.id;
+  });
+  setMostWanted();
+}
+
+function setMostWanted() {
+  beerCount.sort((a, b) => a.amount - b.amount);
+  console.log(beerCount[9].name);
+  document
+    .querySelectorAll(".beer")
+    .forEach((beer) => beer.classList.remove("most-wanted"));
+  document.querySelector(`#${beerCount[9].name}`).classList.add("most-wanted");
 }
