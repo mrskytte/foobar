@@ -16,6 +16,7 @@ let beersArray = [];
 let allBeers = [];
 let displayedBeers = [];
 let beersOnTap = [];
+
 const Beer = {
   image: "",
   name: "",
@@ -108,6 +109,8 @@ function displayNowServing(bartender, bartenderNumber) {
   const id =
     bartender[0].id > 100
       ? bartender[0].id.toString().substring(n)
+      : bartender[0].id.length < 2
+      ? "0" + bartender[0].id.toString()
       : bartender[0].id;
   const imgUrl = `url('images/tickets/ticket_${id}.png')`;
   servingTicket.style.setProperty("--image-url", imgUrl);
@@ -122,6 +125,8 @@ function displayNewNowServing(bartender, bartenderNumber) {
   const id =
     bartender[0].id > 100
       ? bartender[0].id.toString().substring(n)
+      : bartender[0].id.length < 2
+      ? "0" + bartender[0].id.toString()
       : bartender[0].id;
   const imgUrl = `url('images/tickets/ticket_${id}.png')`;
   secondServingTicket.style.setProperty("--image-url", imgUrl);
@@ -277,6 +282,8 @@ function prepareQueue() {
     const id =
       currentQueue[i].id > 100
         ? currentQueue[i].id.toString().substring(n)
+        : currentQueue[i].id.length < 2
+        ? "0" + currentQueue[i].id.toString()
         : currentQueue[i].id;
 
     if (id !== "hideme") {
@@ -291,10 +298,14 @@ function prepareQueue() {
     }
 
     queue[i].dataset.id = id;
-    queue[i].style.setProperty(
-      "--image-url",
-      `url('images/tickets/ticket_${id}.png')`
-    );
+    if (id !== "hideme") {
+      queue[i].style.setProperty(
+        "--image-url",
+        `url('images/tickets/ticket_${id}.png')`
+      );
+    } else {
+      queue[i].style.setProperty("--image-url", `#`);
+    }
   }
 }
 
@@ -387,6 +398,8 @@ function changeTicketId(thisTicket, i) {
   const id =
     currentQueue[i].id > 100
       ? currentQueue[i].id.toString().substring(n)
+      : currentQueue[i].id.length < 2
+      ? "0" + currentQueue[i].id.toString()
       : currentQueue[i].id;
 
   thisTicket.dataset.id = id;
