@@ -158,8 +158,6 @@ function updateNowServing(update) {
   } else if (
     JSON.stringify(currentlyNowServing) !== JSON.stringify(nowServing)
   ) {
-    console.log("current", JSON.stringify(currentlyNowServing));
-    console.log("lastwws", JSON.stringify(nowServing));
     console.log("adding one tickets");
     oneNewNowServingEntry();
   } else {
@@ -244,7 +242,8 @@ function removeNowServingTicket() {
     bartenderOneServing.pop();
     document.querySelector(`#serving1`).classList.add("hide");
     console.log("ticket removed 1");
-  } else if (
+  }
+  if (
     !currentlyNowServing.some((order) => order.id === bartenderTwoServing[0].id)
   ) {
     bartenderTwoServing.unshift({ id: "empty" });
@@ -252,7 +251,8 @@ function removeNowServingTicket() {
     document.querySelector(`#serving2`).classList.add("hide");
 
     console.log("ticket removed 2");
-  } else if (
+  }
+  if (
     !currentlyNowServing.some(
       (order) => order.id === bartenderThreeServing[0].id
     )
@@ -342,7 +342,7 @@ function checkQueueProgress(queue) {
     lastQueue = [...currentQueue];
     updateQueue();
   } else if (lastQueue[0].id !== currentQueue[0].id) {
-    if (lastQueue.length < 2) {
+    if (lastQueue.length < 3) {
     } else if (lastQueue[1].id === currentQueue[0].id) {
       setIterations(1);
     } else if (lastQueue[2].id === currentQueue[0].id) {
@@ -374,6 +374,7 @@ function setIterations(iterations) {
 
 function moveQueue() {
   console.log(currentQueue);
+  fillOutQueueArray();
   for (let i = 0; i < 6; i++) {
     const thisTicket = document.getElementById(`ticket${1 + i}`);
     changeTicketId(thisTicket, i);
