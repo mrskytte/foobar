@@ -388,12 +388,12 @@ td {
     border-bottom: 5px solid #2a2723;
   }
 
-  #storage > img {
+  .storage > img {
     width: 60%;
     margin: 5%;
   }
 
-  #storage {
+  .storage {
     flex-grow: 1;
     flex-shrink: 0;
     flex-basis: calc(20%);
@@ -413,13 +413,13 @@ td {
     margin-right: auto;
   }
 
-  #oneTap {
+  .oneTap {
     margin-bottom: 5%;
     display: flex;
     justify-content: space-between;
   }
 
-  #oneTap_img > img {
+  .oneTap_img > img {
     grid-area: label;
     width: 50%;
     height: 100%;
@@ -427,12 +427,12 @@ td {
     margin-right: auto;
   }
 
-  #oneTap_img {
+  .oneTap_img {
     width: 200px;
     display: flex;
   }
 
-  #oneTap_beer {
+  .oneTap_beer {
     width: 100px;
     display: flex;
     align-items: center;
@@ -440,7 +440,7 @@ td {
     font-size: 1.5em;
   }
 
-  #oneTap_level {
+  .oneTap_level {
     width: 100px;
     display: flex;
     align-items: center;

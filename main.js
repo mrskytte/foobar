@@ -489,7 +489,7 @@ function getStorage(data) {
     } else if (oneBeer.name === "Steampunk") {
       beerImage = "steampunk";
     }
-    var row = `<div id="storage"><img src="images/beers/${beerImage}.png" alt="Beer Label"/><br> ${oneBeer.name}:<br> ${oneBeer.amount}</div>`;
+    var row = `<div class="storage"><img src="images/beers/${beerImage}.png" alt="Beer Label"/><br> ${oneBeer.name}:<br> ${oneBeer.amount}</div>`;
     stock.innerHTML += row;
   });
 }
@@ -523,9 +523,9 @@ function getTheTap(data) {
       dataImage = "steampunk";
     }
 
-    var row = `<div id="oneTap"><div id="oneTap_img"><img src="images/beers/${dataImage}.png" alt="Beer Label"/></div><div id="oneTap_beer">${
+    var row = `<div class="oneTap"><div class="oneTap_img"><img src="images/beers/${dataImage}.png" alt="Beer Label"/></div><div class="oneTap_beer">${
       oneTap.beer
-    }</div><div id="oneTap_level"ś>${oneTap.level / 100} l</div></div>`;
+    }</div><div class="oneTap_level">${oneTap.level / 100} l</div></div>`;
     table.innerHTML += row;
   });
 }
