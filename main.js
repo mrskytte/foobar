@@ -1,4 +1,5 @@
 "use strict";
+import "@babel/polyfill";
 
 window.addEventListener("load", init);
 
