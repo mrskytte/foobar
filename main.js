@@ -109,7 +109,7 @@ function displayNowServing(bartender, bartenderNumber) {
   const id =
     bartender[0].id > 100
       ? bartender[0].id.toString().substring(n)
-      : bartender[0].id.length < 2
+      : bartender[0].id.toString().length < 2
       ? "0" + bartender[0].id.toString()
       : bartender[0].id;
   const imgUrl = `url('images/tickets/ticket_${id}.png')`;
@@ -125,7 +125,7 @@ function displayNewNowServing(bartender, bartenderNumber) {
   const id =
     bartender[0].id > 100
       ? bartender[0].id.toString().substring(n)
-      : bartender[0].id.length < 2
+      : bartender[0].id.toString().length < 2
       ? "0" + bartender[0].id.toString()
       : bartender[0].id;
   const imgUrl = `url('images/tickets/ticket_${id}.png')`;
@@ -148,25 +148,19 @@ function displayNewNowServing(bartender, bartenderNumber) {
 function updateNowServing(update) {
   currentlyNowServing = [...update];
   if (currentlyNowServing.length < 3) {
-    console.log("currentlyNowServing", currentlyNowServing);
     removeNowServingTicket();
-    console.log("nobody to serve");
     return;
   }
   if (nowServing.length < 3) {
     nowServing.push({ id: "empty" });
   }
-  console.log(JSON.stringify(nowServing));
   if (nowServing[2].id === currentlyNowServing[0].id) {
-    console.log("adding two tickets");
     twoNewNowServingEntries();
   } else if (
     JSON.stringify(currentlyNowServing) !== JSON.stringify(nowServing)
   ) {
-    console.log("adding one tickets");
     oneNewNowServingEntry();
   } else {
-    console.log("nothing new to add");
   }
   nowServing = [...currentlyNowServing];
 }
@@ -181,7 +175,6 @@ function twoNewNowServingEntries() {
     displayNewNowServing(bartenderOneServing, 1);
     document.querySelector(`#serving1`).classList.add("remove");
     counter++;
-    console.log("two new Order one", bartenderOneServing[0].id);
   }
   if (
     !currentlyNowServing.some((order) => order.id === bartenderTwoServing[0].id)
@@ -189,7 +182,6 @@ function twoNewNowServingEntries() {
     bartenderTwoServing.unshift(currentlyNowServing[counter]);
     bartenderTwoServing.pop();
     displayNewNowServing(bartenderTwoServing, 2);
-    console.log("two new Order two", bartenderTwoServing[0].id);
     document.querySelector(`#serving2`).classList.add("remove");
     counter++;
   }
@@ -203,7 +195,6 @@ function twoNewNowServingEntries() {
     displayNewNowServing(bartenderThreeServing, 3);
     document.querySelector(`#serving3`).classList.add("remove");
     counter++;
-    console.log("two new Order three", bartenderThreeServing[0].id);
   }
 }
 
@@ -215,8 +206,6 @@ function oneNewNowServingEntry() {
     bartenderOneServing.pop();
     displayNewNowServing(bartenderOneServing, 1);
     document.querySelector(`#serving1`).classList.remove("hide");
-
-    console.log("new Order one", bartenderOneServing[0].id);
   } else if (
     !currentlyNowServing.some((order) => order.id === bartenderTwoServing[0].id)
   ) {
@@ -224,8 +213,6 @@ function oneNewNowServingEntry() {
     bartenderTwoServing.pop();
     displayNewNowServing(bartenderTwoServing, 2);
     document.querySelector(`#serving2`).classList.add("remove");
-
-    console.log("new Order two", bartenderTwoServing[0].id);
   } else if (
     !currentlyNowServing.some(
       (order) => order.id === bartenderThreeServing[0].id
@@ -235,7 +222,6 @@ function oneNewNowServingEntry() {
     bartenderThreeServing.pop();
     displayNewNowServing(bartenderThreeServing, 3);
     document.querySelector(`#serving3`).classList.add("remove");
-    console.log("new Order three", bartenderThreeServing[0].id);
   }
 }
 
@@ -246,7 +232,6 @@ function removeNowServingTicket() {
     bartenderOneServing.unshift({ id: "empty" });
     bartenderOneServing.pop();
     document.querySelector(`#serving1`).classList.add("hide");
-    console.log("ticket removed 1");
   }
   if (
     !currentlyNowServing.some((order) => order.id === bartenderTwoServing[0].id)
@@ -254,8 +239,6 @@ function removeNowServingTicket() {
     bartenderTwoServing.unshift({ id: "empty" });
     bartenderTwoServing.pop();
     document.querySelector(`#serving2`).classList.add("hide");
-
-    console.log("ticket removed 2");
   }
   if (
     !currentlyNowServing.some(
@@ -265,7 +248,6 @@ function removeNowServingTicket() {
     bartenderThreeServing.unshift({ id: "empty" });
     bartenderThreeServing.pop();
     document.querySelector(`#serving3`).classList.add("hide");
-    console.log("ticket removed 3");
   }
 }
 
@@ -282,7 +264,7 @@ function prepareQueue() {
     const id =
       currentQueue[i].id > 100
         ? currentQueue[i].id.toString().substring(n)
-        : currentQueue[i].id.length < 2
+        : currentQueue[i].id.toString().length < 2
         ? "0" + currentQueue[i].id.toString()
         : currentQueue[i].id;
 
@@ -335,21 +317,15 @@ async function updateData() {
 
 function checkQueueProgress(queue) {
   currentQueue = [...queue];
-  //console.log("last", lastQueue);
-  //console.log("current", currentQueue);
   if (lastQueue.length < currentQueue.length) {
-    //console.log("adding new entries");
     prepareQueue();
   }
   if (!currentQueue[0] && !lastQueue[0]) {
-    //console.log("empty arrays and nothing new");
   } else if (!currentQueue[0] && lastQueue[0]) {
-    //console.log("Queue emptied out");
     setIterations(lastQueue.length);
     lastQueue = [...currentQueue];
     updateQueue();
   } else if (!lastQueue[0] && currentQueue[0]) {
-    //console.log("new entry + old queue empty ");
     lastQueue = [...currentQueue];
     updateQueue();
   } else if (lastQueue[0].id !== currentQueue[0].id) {
@@ -361,10 +337,8 @@ function checkQueueProgress(queue) {
     }
     lastQueue = [...currentQueue];
 
-    //console.log("new entry");
     updateQueue();
   } else if (lastQueue[0].id === currentQueue[0].id) {
-    //console.log("no change");
   } else {
     lastQueue = [...currentQueue];
 
@@ -384,7 +358,6 @@ function setIterations(iterations) {
 }
 
 function moveQueue() {
-  console.log(currentQueue);
   fillOutQueueArray();
   for (let i = 0; i < 6; i++) {
     const thisTicket = document.getElementById(`ticket${1 + i}`);
@@ -398,15 +371,19 @@ function changeTicketId(thisTicket, i) {
   const id =
     currentQueue[i].id > 100
       ? currentQueue[i].id.toString().substring(n)
-      : currentQueue[i].id.length < 2
+      : currentQueue[i].id.toString().length < 2
       ? "0" + currentQueue[i].id.toString()
       : currentQueue[i].id;
 
   thisTicket.dataset.id = id;
-  thisTicket.style.setProperty(
-    "--image-url",
-    `url('images/tickets/ticket_${id}.png')`
-  );
+  if (id !== "hideme") {
+    thisTicket.style.setProperty(
+      "--image-url",
+      `url('images/tickets/ticket_${id}.png')`
+    );
+  } else {
+    thisTicket.style.setProperty("--image-url", `#`);
+  }
 }
 
 function showActiveTickets() {
@@ -422,7 +399,6 @@ function showActiveTickets() {
 
 function prepareObjects(jsonData) {
   allBeers = jsonData.map(prepareObject);
-  // TODO: This might not be the function we want to call first
   displayList(allBeers);
 }
 
@@ -454,7 +430,6 @@ function displayBeer(beer) {
 
   clone.querySelector(".beer > img").src = beer.image;
 
-  //clone.querySelector("[data-field=image]").textContent = beer.image;
   clone
     .querySelector(".beer")
     .setAttribute("id", beer.name.replace(/\s+/g, ""));
@@ -469,11 +444,7 @@ function displayBeer(beer) {
 async function fetchMenago() {
   const data = await fetch(endpoint);
   const response = await data.json();
-  //console.log(response);
 
-  console.log(
-    `It is ${response.bar.closingTime} and we have ${response.bartenders.length} bartenders: ${response.bartenders[0].name}`
-  );
   prepareManager(response);
 }
 
@@ -486,11 +457,9 @@ function prepareManager(menago) {
 
   //ontap
   getTheTap(menago.taps);
-  //best_setlling
 }
 
 function buildTable(data) {
-  //console.log(data);
   var table = document.getElementById("bartenderr");
   table.innerHTML = "";
 
