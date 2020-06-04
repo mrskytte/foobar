@@ -31,7 +31,6 @@ function init() {
   getQueueSpacing();
   isQueueMoveDone();
   getInitialData();
-  prepareQueue();
 }
 
 function getQueueSpacing() {
@@ -81,6 +80,7 @@ async function getInitialData() {
   prepareQueue();
   startSystem();
   countBeers(response.queue);
+  prepareManager(response);
 }
 
 function prepareNowServing(data) {
@@ -439,13 +439,6 @@ function displayBeer(beer) {
   clone.querySelector("[data-field=price]").textContent = beer.price + ",0kr.";
   // append clone to list
   document.querySelector("#list").appendChild(clone);
-}
-//Setting up the fetching//
-async function fetchMenago() {
-  const data = await fetch(endpoint);
-  const response = await data.json();
-
-  prepareManager(response);
 }
 
 function prepareManager(menago) {
